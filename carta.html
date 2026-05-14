@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Carta · Teleclub Tahiche</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --green-900:#0e3a26;
+    --green-800:#13502f;
+    --green-700:#1a6e3f;
+    --green-600:#1f8a4a;
+    --green-500:#27a35a;
+    --green-300:#9fd7b3;
+    --green-100:#e6f3ea;
+    --green-50:#f1f8f3;
+    --cream:#f7f3ea;
+    --cream-warm:#efe7d4;
+    --ink:#0c1d14;
+    --ink-soft:#33463a;
+    --line:rgba(14,58,38,.14);
+    --font-sans:'General Sans','Plus Jakarta Sans',system-ui,sans-serif;
+    --font-display:'General Sans','Plus Jakarta Sans',serif;
+    --font-script:'Caveat',cursive;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:120px}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer}
+  h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em;margin:0}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 28px}
+
+  /* header — same chrome as home */
+  header.site{
+    position:fixed;top:18px;left:50%;transform:translateX(-50%);
+    width:min(1360px,calc(100% - 32px));z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 14px 10px 22px;
+    background:rgba(247,243,234,.78);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.6);
+    border-radius:999px;
+    box-shadow:0 12px 40px -20px rgba(14,58,38,.35);
+  }
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand-mark{width:38px;height:38px;border-radius:10px;background:var(--ink);display:grid;place-items:center;color:#bff5d0}
+  .brand-mark svg{width:24px;height:24px}
+  .brand-name{font-family:var(--font-script);font-size:22px;color:var(--green-800);line-height:1;margin-top:2px}
+  .brand-sub{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+  nav.primary{display:flex;gap:6px}
+  nav.primary a{padding:9px 14px;font-size:14px;font-weight:500;color:var(--ink-soft);border-radius:999px;transition:.18s}
+  nav.primary a:hover{background:rgba(31,138,74,.1);color:var(--green-800)}
+  nav.primary a.is-active{background:var(--ink);color:#fff}
+  .header-cta{display:flex;align-items:center;gap:10px}
+  .lang-toggle{display:flex;background:rgba(14,29,20,.06);padding:4px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.04em}
+  .lang-toggle button{border:0;background:transparent;padding:5px 11px;border-radius:999px;color:var(--ink-soft);text-transform:uppercase}
+  .lang-toggle button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;font-weight:600;font-size:14px;border-radius:999px;border:0;transition:.2s;white-space:nowrap}
+  .btn-primary{background:var(--green-600);color:#fff;box-shadow:0 8px 22px -10px rgba(31,138,74,.7), inset 0 1px 0 rgba(255,255,255,.2)}
+  .btn-primary:hover{background:var(--green-700);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{background:rgba(255,255,255,.6)}
+  @media (max-width:880px){nav.primary{display:none}header.site{padding:8px 8px 8px 16px}}
+
+  /* page hero */
+  .page-hero{
+    position:relative;padding:160px 0 60px;
+    background:
+      radial-gradient(circle at 80% 20%,rgba(31,138,74,.18),transparent 50%),
+      radial-gradient(circle at 10% 80%,rgba(199,153,103,.15),transparent 55%),
+      var(--cream);
+    overflow:hidden;
+  }
+  .page-hero .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--green-700);font-weight:700;margin-bottom:18px}
+  .page-hero .eyebrow::before{content:"";width:22px;height:1px;background:var(--green-500)}
+  .page-hero h1{font-size:clamp(56px,8vw,118px);line-height:.96;letter-spacing:-.035em;color:var(--green-900);max-width:14ch}
+  .page-hero h1 em{font-family:var(--font-script);font-style:normal;color:var(--green-600);font-weight:500;display:block;font-size:.65em;letter-spacing:0;line-height:1;margin-top:-.08em}
+  .page-hero .lede{font-size:18px;color:var(--ink-soft);max-width:54ch;margin-top:24px;line-height:1.6;text-wrap:pretty}
+  .page-hero .crumb{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:28px}
+  .page-hero .crumb a{color:var(--ink-soft);text-decoration:none}
+  .page-hero .crumb a:hover{color:var(--green-700)}
+  .page-hero .crumb span{opacity:.4}
+  .page-hero .meta{display:flex;gap:24px;margin-top:30px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft)}
+  .page-hero .meta .pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:9px 14px;border-radius:999px;color:var(--ink);font-weight:500}
+  .page-hero .meta .pill svg{color:var(--green-600);width:14px;height:14px}
+
+  /* sticky category nav */
+  .cat-bar{
+    position:sticky;top:90px;z-index:30;
+    background:rgba(247,243,234,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:14px 0;
+  }
+  .cat-track{display:flex;gap:8px;overflow-x:auto;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;padding:2px}
+  .cat-track::-webkit-scrollbar{display:none}
+  .cat-track button{
+    flex:none;display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--line);background:#fff;color:var(--ink);
+    padding:9px 16px 9px 12px;border-radius:999px;font-size:13.5px;font-weight:600;letter-spacing:-.005em;
+    transition:.18s;white-space:nowrap;
+  }
+  .cat-track button .ic{width:22px;height:22px;border-radius:6px;background:var(--green-50);color:var(--green-700);display:grid;place-items:center}
+  .cat-track button .ic svg{width:13px;height:13px}
+  .cat-track button:hover{border-color:var(--green-500);transform:translateY(-1px)}
+  .cat-track button.on{background:var(--green-800);color:#fff;border-color:var(--green-800)}
+  .cat-track button.on .ic{background:rgba(255,255,255,.15);color:#bff5d0}
+
+  /* category sections */
+  main.menu-page{padding:50px 0 80px}
+  .cat-section{padding:60px 0 30px;scroll-margin-top:160px}
+  .cat-section + .cat-section{border-top:1px dashed var(--line)}
+  .cat-head{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:end;margin-bottom:36px}
+  .cat-head .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--green-700);font-weight:700;margin-bottom:10px}
+  .cat-head .eyebrow::before{content:"";width:22px;height:1px;background:var(--green-500)}
+  .cat-head h2{font-size:clamp(36px,4.4vw,58px);line-height:1.02;letter-spacing:-.03em;color:var(--green-900)}
+  .cat-head h2 em{font-family:var(--font-script);font-style:normal;color:var(--green-600);font-weight:500}
+  .cat-head .desc{font-size:15px;color:var(--ink-soft);line-height:1.6;max-width:50ch;padding-bottom:6px}
+
+  .dish-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .dish{
+    background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+    display:flex;flex-direction:column;transition:.25s;
+    box-shadow:0 14px 36px -28px rgba(14,58,38,.4);
+  }
+  .dish:hover{transform:translateY(-3px);box-shadow:0 24px 48px -28px rgba(14,58,38,.55);border-color:var(--green-300)}
+  .dish-img{aspect-ratio:1.4/1;background:var(--green-50);position:relative;overflow:hidden}
+  .dish-img img{width:100%;height:100%;object-fit:cover;transition:.6s}
+  .dish:hover .dish-img img{transform:scale(1.05)}
+  .dish-img .badge{position:absolute;top:12px;left:12px;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#0c1d14;background:#bff5d0;padding:5px 9px;border-radius:999px}
+  .dish-img .badge.warn{background:#fde68a;color:#854d0e}
+  .dish-img .badge.hot{background:#fecaca;color:#991b1b}
+  .dish-img .placeholder{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,var(--green-100),var(--green-50));color:var(--green-700);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;text-align:center;padding:24px}
+  .dish-img .placeholder svg{width:32px;height:32px;margin:0 auto 10px;opacity:.45;display:block}
+
+  .dish-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .dish-top{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+  .dish h4{font-size:17.5px;color:var(--green-900);letter-spacing:-.01em;font-weight:600;line-height:1.25;flex:1;min-width:0}
+  .dish .price{font-family:var(--font-display);font-size:19px;font-weight:600;color:var(--green-700);letter-spacing:-.01em;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .dish p{margin:2px 0 0;font-size:13.5px;color:var(--ink-soft);line-height:1.55}
+  .dish-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .dish-tag{font-size:10.5px;letter-spacing:.06em;color:var(--ink-soft);background:var(--green-50);padding:4px 9px;border-radius:6px;font-weight:600}
+  .dish-tag.veg{background:#dcfce7;color:#14532d}
+  .dish-tag.spicy{background:#fee2e2;color:#7f1d1d}
+  .dish-tag.gf{background:#fef3c7;color:#713f12}
+
+  @media (max-width:1000px){.dish-grid{grid-template-columns:repeat(2,1fr)} .cat-head{grid-template-columns:1fr;gap:14px}}
+  @media (max-width:640px){.dish-grid{grid-template-columns:1fr}}
+
+  /* chef note callout */
+  .chef-note{
+    margin:60px 0 0;padding:42px;border-radius:24px;
+    background:var(--green-900);color:#e7f3eb;display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;
+    position:relative;overflow:hidden;
+  }
+  .chef-note::before{content:"";position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(31,138,74,.4),transparent 70%)}
+  .chef-note .q{font-family:var(--font-script);font-size:42px;line-height:1.05;color:#fff;position:relative}
+  .chef-note .q::before{content:"\201C";font-size:120px;line-height:.8;color:rgba(134,239,172,.25);position:absolute;top:-30px;left:-10px}
+  .chef-note .by{display:flex;align-items:center;gap:14px;margin-top:18px;font-size:13px;color:rgba(255,255,255,.7);position:relative}
+  .chef-note .by .av{width:42px;height:42px;border-radius:50%;background:#86efac;color:#0c1d14;display:grid;place-items:center;font-weight:700;font-family:var(--font-display);font-size:16px}
+  .chef-note .by strong{color:#fff;display:block;font-weight:600}
+  .chef-note .stats{display:grid;grid-template-columns:1fr 1fr;gap:18px;position:relative}
+  .chef-note .stat{padding:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px}
+  .chef-note .stat .n{font-family:var(--font-display);font-size:30px;color:#fff;font-weight:600;letter-spacing:-.02em}
+  .chef-note .stat .l{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#86efac;font-weight:700;margin-top:4px}
+  @media (max-width:780px){.chef-note{grid-template-columns:1fr;padding:30px}}
+
+  /* legend / footer */
+  .legend{margin-top:56px;padding:28px;background:#fff;border:1px solid var(--line);border-radius:18px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+  .legend .items{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-soft)}
+  .legend .items span{display:inline-flex;align-items:center;gap:8px}
+  .legend .items span::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--green-50)}
+  .legend .items .veg::before{background:#dcfce7}
+  .legend .items .gf::before{background:#fef3c7}
+  .legend .items .spicy::before{background:#fee2e2}
+
+  /* CTA strip */
+  .cta-strip{padding:80px 0;background:var(--green-900);color:#fff;position:relative;overflow:hidden}
+  .cta-strip::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 50%,rgba(31,138,74,.35),transparent 60%)}
+  .cta-grid{position:relative;display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:center}
+  .cta-grid h2{font-size:clamp(38px,4.5vw,58px);line-height:1.02;letter-spacing:-.03em;color:#fff;max-width:18ch}
+  .cta-grid h2 em{font-family:var(--font-script);font-style:normal;color:#bff5d0;font-weight:500}
+  .cta-grid p{font-size:15.5px;color:rgba(255,255,255,.78);line-height:1.6;margin-top:14px;max-width:46ch}
+  .cta-actions{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+  .cta-actions .btn-ghost{border-color:rgba(255,255,255,.2);color:#fff}
+  .cta-actions .btn-ghost:hover{background:rgba(255,255,255,.08)}
+  @media (max-width:900px){.cta-grid{grid-template-columns:1fr}.cta-actions{justify-content:flex-start}}
+
+  /* footer */
+  footer.site{background:#0a1610;color:rgba(255,255,255,.7);padding:42px 0 30px;border-top:1px solid rgba(255,255,255,.05)}
+  .foot-grid{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  .foot-brand{font-family:var(--font-script);font-size:26px;color:#fff}
+  .foot-brand .sub{display:block;font-family:var(--font-sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#86efac;font-weight:600;margin-top:2px}
+  .foot-links{display:flex;gap:24px;font-size:13px}
+  .foot-links a:hover{color:#fff}
+  .foot-meta{font-size:12px;color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="Teleclub Tahiche.html">
+    <span class="brand-mark">
+      <svg viewBox="0 0 48 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 14 C 10 2, 38 2, 46 14 C 38 26, 10 26, 2 14 Z"/>
+        <circle cx="24" cy="14" r="4.2" fill="currentColor" stroke="none"/>
+      </svg>
+    </span>
+    <span style="display:flex;flex-direction:column;gap:2px">
+      <span class="brand-name">Teleclub Tahiche</span>
+      <span class="brand-sub" data-i18n="brand_sub">Bar · Cocina · Encuentro</span>
+    </span>
+  </a>
+  <nav class="primary">
+    <a href="Teleclub Tahiche.html" data-i18n="nav_home">Inicio</a>
+    <a href="Teleclub Tahiche.html#about" data-i18n="nav_about">Sobre nosotros</a>
+    <a class="is-active" href="Carta.html" data-i18n="nav_menu">Carta</a>
+  </nav>
+  <div class="header-cta">
+    <div class="lang-toggle" id="langToggle">
+      <button data-lang="es" class="on">ES</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <a class="btn btn-primary" href="Teleclub Tahiche.html#hero">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <span data-i18n="cta_book">Reservar mesa</span>
+    </a>
+  </div>
+</header>
+
+<!-- page hero -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb">
+      <a href="Teleclub Tahiche.html" data-i18n="crumb_home">Inicio</a>
+      <span>/</span>
+      <span data-i18n="nav_menu">Carta</span>
+    </div>
+    <span class="eyebrow" data-i18n="ph_eyebrow">Nuestra carta</span>
+    <h1>
+      <span data-i18n="ph_h1_a">Lo de hoy,</span>
+      <em data-i18n="ph_h1_b">como en casa</em>
+    </h1>
+    <p class="lede" data-i18n="ph_lede">Producto local, recetas honestas. La carta cambia con lo que llega de la lonja y la huerta. Pregunta al camarero por la pizarra del día — ahí están las sorpresas.</p>
+    <div class="meta">
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s7-7.5 7-13a7 7 0 0 0-14 0c0 5.5 7 13 7 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <span data-i18n="m_local">Producto canario</span>
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M5 7h14M5 12h14M5 17h14" opacity=".4"/><path d="M7 5l10 14M7 19L17 5"/></svg>
+        <span data-i18n="m_change">Carta de temporada</span>
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span data-i18n="m_update">Actualizada hoy</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- sticky category nav -->
+<div class="cat-bar">
+  <div class="wrap">
+    <div class="cat-track" id="catTrack">
+      <button data-target="picar" class="on">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg></span>
+        <span data-i18n="cat_picar">Para picar</span>
+      </button>
+      <button data-target="mar">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 12c4-5 10-5 14 0M3 12c4 5 10 5 14 0"/><circle cx="18" cy="12" r="1" fill="currentColor"/></svg></span>
+        <span data-i18n="cat_mar">Del mar</span>
+      </button>
+      <button data-target="tierra">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l9-12 9 12H3Z"/><path d="M9 17l3-4 3 4"/></svg></span>
+        <span data-i18n="cat_tierra">De la tierra</span>
+      </button>
+      <button data-target="veggie">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5-2 8-7 8-12l-8 4-8-4c0 5 3 10 8 12Z"/><path d="M12 22V10"/></svg></span>
+        <span data-i18n="cat_veg">De la huerta</span>
+      </button>
+      <button data-target="postres">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16l-2 9H6l-2-9Z"/><path d="M8 12V8a4 4 0 0 1 8 0v4"/></svg></span>
+        <span data-i18n="cat_postres">Postres</span>
+      </button>
+      <button data-target="vinos">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l-1 6a4 4 0 0 1-3 4 4 4 0 0 1-3-4L8 3Z"/><path d="M12 13v7M8 21h8"/></svg></span>
+        <span data-i18n="cat_vinos">Vinos & cócteles</span>
+      </button>
+      <button data-target="cafes">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8Z"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/><path d="M8 4v2M11 3v3M14 4v2"/></svg></span>
+        <span data-i18n="cat_cafes">Cafés & sobremesa</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<main class="menu-page">
+  <div class="wrap">
+
+    <!-- PARA PICAR -->
+    <section class="cat-section" id="picar">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow"><span data-i18n="cat_n_01">01</span> · <span data-i18n="cat_picar">Para picar</span></span>
+          <h2><span data-i18n="ch_picar_a">Lo primero que llega a</span> <em data-i18n="ch_picar_b">la mesa</em><span data-i18n="ch_picar_c">.</span></h2>
+        </div>
+        <p class="desc" data-i18n="ch_picar_d">Tapas honestas, para compartir y abrir boca. La mayoría salen calientes de la cocina; algunas frías de la nevera. Pídete varias y reparte.</p>
+      </div>
+      <div class="dish-grid">
+        <!-- featured dish with real photo -->
+        <article class="dish">
+          <div class="dish-img">
+            <span class="badge" data-i18n="b_signature">Plato estrella</span>
+            <img src="photos/shrimp-neon.jpg" alt="Gambas al ajillo bajo el neón verde" />
+          </div>
+          <div class="dish-body">
+            <div class="dish-top">
+              <h4 data-i18n="d_gambas">Gambas al ajillo</h4>
+              <span class="price">12,00 €</span>
+            </div>
+            <p data-i18n="d_gambas_d">De la lonja de Arrecife. Aceite, ajo crujiente, guindilla y pan tostado para mojar.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_local">Local</span><span class="dish-tag spicy" data-i18n="t_spicy">Picantito</span></div>
+          </div>
+        </article>
+
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="13" r="6"/><circle cx="12" cy="13" r="2.5" fill="currentColor"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top">
+              <h4 data-i18n="d_papas">Papas arrugadas con mojos</h4>
+              <span class="price">7,50 €</span>
+            </div>
+            <p data-i18n="d_papas_d">Las de toda la vida. Mojo rojo y verde de la casa, con comino y cilantro.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span><span class="dish-tag gf" data-i18n="t_gf">Sin gluten</span></div>
+          </div>
+        </article>
+
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="8" width="14" height="10" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top">
+              <h4 data-i18n="d_queso">Queso asado de Uga</h4>
+              <span class="price">9,00 €</span>
+            </div>
+            <p data-i18n="d_queso_d">De cabra, a la plancha, con mojo de palmera y tostas de pan negro.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span><span class="dish-tag" data-i18n="t_local">Local</span></div>
+          </div>
+        </article>
+
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="13" rx="6" ry="4.5"/><path d="M12 8.5c0-2 2-3 4-3" /></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top">
+              <h4 data-i18n="d_croquetas">Croquetas de cherne</h4>
+              <span class="price">8,50 €</span>
+            </div>
+            <p data-i18n="d_croquetas_d">Cremosas por dentro, doradas por fuera. Rebozadas a mano, 6 unidades.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_house">Receta de la casa</span></div>
+          </div>
+        </article>
+
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M6 7l1 12h10l1-12"/><circle cx="10" cy="13" r="1" fill="currentColor"/><circle cx="14" cy="15" r="1" fill="currentColor"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top">
+              <h4 data-i18n="d_aceitunas">Aceitunas de la casa</h4>
+              <span class="price">4,00 €</span>
+            </div>
+            <p data-i18n="d_aceitunas_d">Aliñadas con comino, ajo, hierbas y aceite local de oliva.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span></div>
+          </div>
+        </article>
+
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17h18M5 17l1-7h12l1 7M9 10V7M15 10V7"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top">
+              <h4 data-i18n="d_tabla">Tabla de quesos canarios</h4>
+              <span class="price">14,00 €</span>
+            </div>
+            <p data-i18n="d_tabla_d">Tres quesos de la isla, mermelada de higo, pan de la abuela y nueces.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span><span class="dish-tag" data-i18n="t_share">Para compartir</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- DEL MAR -->
+    <section class="cat-section" id="mar">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow"><span data-i18n="cat_n_02">02</span> · <span data-i18n="cat_mar">Del mar</span></span>
+          <h2><span data-i18n="ch_mar_a">Lo que pesca</span> <em data-i18n="ch_mar_b">la cofradía</em><span data-i18n="ch_mar_c">.</span></h2>
+        </div>
+        <p class="desc" data-i18n="ch_mar_d">Pescado fresco del día, llegado por la mañana de la lonja de Arrecife. Si te apetece algo en concreto, pregunta — la pizarra cambia con la marea.</p>
+      </div>
+      <div class="dish-grid">
+        <article class="dish">
+          <div class="dish-img"><span class="badge warn" data-i18n="b_today">Hoy</span><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12c4-5 12-5 16 0M3 12c4 5 12 5 16 0"/><circle cx="18" cy="12" r="1" fill="currentColor"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_vieja">Vieja sancochada</h4><span class="price">18,50 €</span></div>
+            <p data-i18n="d_vieja_d">Pescado del día con papas arrugadas y mojo verde. Como manda la tradición.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_signature">Estrella</span><span class="dish-tag gf" data-i18n="t_gf">Sin gluten</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12c2-2 5-2 7 0s5 2 7 0M5 16c2-2 5-2 7 0s5 2 7 0"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_chipi">Chipirones a la plancha</h4><span class="price">14,50 €</span></div>
+            <p data-i18n="d_chipi_d">Con cebolla pochada, perejil y lima de la huerta del vecino.</p>
+            <div class="dish-tags"><span class="dish-tag gf" data-i18n="t_gf">Sin gluten</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 14c0-4 4-7 8-7s8 3 8 7-4 4-8 4-8 0-8-4Z"/><circle cx="9" cy="13" r="1" fill="currentColor"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_atun">Atún encebollado</h4><span class="price">15,00 €</span></div>
+            <p data-i18n="d_atun_d">Receta de la abuela María. Jugoso por dentro, cebolla muy lenta.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_house">Receta de la casa</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_lapas">Lapas a la plancha</h4><span class="price">13,50 €</span></div>
+            <p data-i18n="d_lapas_d">Con mojo verde y ajo tostado. Algo muy isleño, para los valientes.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_local">Local</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8c3 0 5 2 5 4M18 8c-3 0-5 2-5 4M12 12v8"/><circle cx="6" cy="8" r="2"/><circle cx="18" cy="8" r="2"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_pulpo">Pulpo a la brasa</h4><span class="price">16,50 €</span></div>
+            <p data-i18n="d_pulpo_d">Sobre puré de batata y aceite de pimentón ahumado de La Vera.</p>
+            <div class="dish-tags"><span class="dish-tag gf" data-i18n="t_gf">Sin gluten</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12c0-3 4-6 9-6s9 3 9 6-4 6-9 6-9-3-9-6Z"/><path d="M18 10l3-2M18 14l3 2"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_caldereta">Caldereta de pescado</h4><span class="price">19,00 €</span></div>
+            <p data-i18n="d_caldereta_d">Guiso marinero con cebolla, pimiento, vino blanco y azafrán de Mancha.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_share">Para compartir</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- chef note -->
+    <div class="chef-note">
+      <div>
+        <div class="q" data-i18n="chef_q">"La cocina no se inventa: se cuida. Lo que servimos es lo que comemos nosotros — y lo que comían nuestras abuelas."</div>
+        <div class="by">
+          <span class="av">P</span>
+          <span><strong data-i18n="chef_name">Pepe Hernández</strong> · <span data-i18n="chef_role">Cocinero & vecino, 1978</span></span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n">48</div><div class="l" data-i18n="cs_dishes">Platos en carta</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l" data-i18n="cs_local">Pescado canario</div></div>
+        <div class="stat"><div class="n">7</div><div class="l" data-i18n="cs_proveedores">Productores locales</div></div>
+        <div class="stat"><div class="n">3</div><div class="l" data-i18n="cs_gen">Generaciones</div></div>
+      </div>
+    </div>
+
+    <!-- DE LA TIERRA -->
+    <section class="cat-section" id="tierra">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow"><span data-i18n="cat_n_03">03</span> · <span data-i18n="cat_tierra">De la tierra</span></span>
+          <h2><span data-i18n="ch_tierra_a">Carnes,</span> <em data-i18n="ch_tierra_b">guisos</em><span data-i18n="ch_tierra_c"> y tradición.</span></h2>
+        </div>
+        <p class="desc" data-i18n="ch_tierra_d">Cocina canaria de cuchara, a fuego lento. Carnes de productores de la isla, ninguna prisa.</p>
+      </div>
+      <div class="dish-grid">
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 12c0-3 3-5 6-5s6 2 6 5-3 5-6 5-6-2-6-5Z"/><path d="M4 18h16"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_conejo">Conejo en salmorejo</h4><span class="price">16,00 €</span></div>
+            <p data-i18n="d_conejo_d">Marinado 24 horas en vino, pimentón y ajo. Guisado muy lento.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_traditional">Tradicional</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><span class="badge" data-i18n="b_signature">Plato estrella</span><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="6"/><path d="M12 8v8M8 12h8"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_cochino">Cochino negro a baja temp.</h4><span class="price">17,50 €</span></div>
+            <p data-i18n="d_cochino_d">12 horas a fuego bajo, con miel de palma y batata asada al horno.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_local">Local</span><span class="dish-tag" data-i18n="t_signature">Estrella</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="11" r="2"/><circle cx="13" cy="9" r="2"/><circle cx="16" cy="13" r="2"/><circle cx="10" cy="15" r="2"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_garbanzas">Garbanzas compuestas</h4><span class="price">11,00 €</span></div>
+            <p data-i18n="d_garbanzas_d">Con costilla de cerdo, chorizo y verduras de la huerta.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_traditional">Tradicional</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 18h16l-2-7H6l-2 7Z"/><path d="M9 11V7M15 11V7"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_ropa">Ropa vieja canaria</h4><span class="price">12,50 €</span></div>
+            <p data-i18n="d_ropa_d">Garbanzos, carne deshilachada y patatas. Como Dios manda.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_traditional">Tradicional</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M8 9V6M16 9V6"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_solomillo">Solomillo a la pimienta</h4><span class="price">19,00 €</span></div>
+            <p data-i18n="d_solomillo_d">De ternera local, salsa de pimienta verde y papas paja.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_local">Local</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 10c0-3 3-5 7-5s7 2 7 5v6c0 2-3 3-7 3s-7-1-7-3v-6Z"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_cabrito">Cabrito al horno</h4><span class="price">21,00 €</span></div>
+            <p data-i18n="d_cabrito_d">Asado entero con mojo palmero, romero y vino malvasía.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_share">Para compartir</span><span class="dish-tag" data-i18n="t_local">Local</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- DE LA HUERTA -->
+    <section class="cat-section" id="veggie">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow"><span data-i18n="cat_n_04">04</span> · <span data-i18n="cat_veg">De la huerta</span></span>
+          <h2><span data-i18n="ch_veg_a">Verde,</span> <em data-i18n="ch_veg_b">fresco</em><span data-i18n="ch_veg_c">, de aquí al lado.</span></h2>
+        </div>
+        <p class="desc" data-i18n="ch_veg_d">Verduras de productores ecológicos de Tahiche, Tao y Mozaga. Cosecha de la semana — preguntar al camarero.</p>
+      </div>
+      <div class="dish-grid">
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21c5-2 8-7 8-12l-8 4-8-4c0 5 3 10 8 12Z"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_ensalada">Ensalada del huerto</h4><span class="price">9,50 €</span></div>
+            <p data-i18n="d_ensalada_d">Tomate, lechuga, aguacate, queso fresco y vinagreta de miel de palma.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span><span class="dish-tag gf" data-i18n="t_gf">Sin gluten</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="13" r="6"/><path d="M9 13l2 2 4-4"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_revuelto">Revuelto de gofio</h4><span class="price">8,50 €</span></div>
+            <p data-i18n="d_revuelto_d">Con setas, espárragos verdes y queso de cabra fundido.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="7"/><path d="M12 5v14M5 12h14"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_calabaza">Calabaza asada</h4><span class="price">10,00 €</span></div>
+            <p data-i18n="d_calabaza_d">Con tahini de la casa, semillas tostadas y hojas de la huerta.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span><span class="dish-tag" data-i18n="t_vegan">Vegano</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 15c3 0 6-2 7-5s4-5 7-5"/><circle cx="6" cy="15" r="2"/><circle cx="19" cy="5" r="2"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_potaje">Potaje de berros</h4><span class="price">9,00 €</span></div>
+            <p data-i18n="d_potaje_d">Caldo verde con piña, judías, calabaza y pella de gofio.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span><span class="dish-tag" data-i18n="t_traditional">Tradicional</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- POSTRES -->
+    <section class="cat-section" id="postres">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow"><span data-i18n="cat_n_05">05</span> · <span data-i18n="cat_postres">Postres</span></span>
+          <h2><span data-i18n="ch_postres_a">Para</span> <em data-i18n="ch_postres_b">cerrar</em><span data-i18n="ch_postres_c"> bien la sobremesa.</span></h2>
+        </div>
+        <p class="desc" data-i18n="ch_postres_d">Postres tradicionales hechos en casa cada mañana. Pequeños — para dejar sitio al café.</p>
+      </div>
+      <div class="dish-grid">
+        <article class="dish">
+          <div class="dish-img"><span class="badge" data-i18n="b_signature">Plato estrella</span><img src="photos/tarta-queso-ahumado.jpg" alt="Tarta de queso ahumado con coulis de frutos rojos" /></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_bienmesabe">Tarta de queso ahumado</h4><span class="price">5,50 €</span></div>
+            <p data-i18n="d_bienmesabe_d">Cremosa, ligeramente ahumada con queso de Uga, coulis de frutos rojos y gofio espolvoreado.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_house">Receta de la casa</span><span class="dish-tag" data-i18n="t_local">Local</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><span class="badge" data-i18n="b_signature">Plato estrella</span><img src="photos/tarta-pistacho.jpg" alt="Tarta de pistacho con base de brownie y sirope" /></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_quesillo">Tarta de pistacho</h4><span class="price">5,00 €</span></div>
+            <p data-i18n="d_quesillo_d">Cremosa de pistacho sobre base de brownie, con sirope de chocolate. Piñón verde por encima.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span><span class="dish-tag" data-i18n="t_house">Receta de la casa</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="13" r="5"/><path d="M12 8V5M9 5h6"/></svg><span data-i18n="ph_dish">Foto del plato</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_helado">Brownie</h4><span class="price">5,50 €</span></div>
+            <p data-i18n="d_helado_d">Brownie de chocolate negro húmeco por dentro, con helado de vainilla y nueces caramelizadas.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><img src="photos/bienmesabe.jpg" alt="Bienmesabe servido en copa con helado y barquillos" /></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_higos">Bienmesabe</h4><span class="price">6,00 €</span></div>
+            <p data-i18n="d_higos_d">Receta tradicional canaria de almendra, miel y limón. Servido en copa con helado y barquillos.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_traditional">Tradicional</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- VINOS & CÓCTELES -->
+    <section class="cat-section" id="vinos">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow"><span data-i18n="cat_n_06">06</span> · <span data-i18n="cat_vinos">Vinos & cócteles</span></span>
+          <h2><span data-i18n="ch_vinos_a">De la</span> <em data-i18n="ch_vinos_b">Geria</em><span data-i18n="ch_vinos_c">, con cariño.</span></h2>
+        </div>
+        <p class="desc" data-i18n="ch_vinos_d">Vinos volcánicos de la isla, cervezas tiradas con cariño y cócteles honestos. Pregunta al camarero por la copa del día.</p>
+      </div>
+      <div class="dish-grid">
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3h8l-1 6a4 4 0 0 1-3 4 4 4 0 0 1-3-4L8 3Z"/><path d="M12 13v7"/></svg><span data-i18n="ph_dish">Foto</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_malvasia">Malvasía volcánica</h4><span class="price">3,50 / 18 €</span></div>
+            <p data-i18n="d_malvasia_d">Blanco seco de La Geria. Copa o botella. Mineral, fresco.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_local">Local</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="8" y="4" width="8" height="14" rx="1"/><path d="M10 4V3h4v1"/></svg><span data-i18n="ph_dish">Foto</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_cana">Caña Dorada / Tropical</h4><span class="price">2,50 €</span></div>
+            <p data-i18n="d_cana_d">Tirada con cariño, muy fría. La de toda la vida.</p>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8l3-4h6l3 4-6 12L6 8Z"/></svg><span data-i18n="ph_dish">Foto</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_mojito">Mojito de la casa</h4><span class="price">7,00 €</span></div>
+            <p data-i18n="d_mojito_d">Hierbabuena fresca del huerto, ron blanco, lima y azúcar moreno.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_house">Receta de la casa</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4h8l-1 5a3 3 0 0 1-3 3 3 3 0 0 1-3-3L8 4Z"/><path d="M12 12v8"/></svg><span data-i18n="ph_dish">Foto</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_ron">Ron miel Arehucas</h4><span class="price">4,50 €</span></div>
+            <p data-i18n="d_ron_d">Canario de toda la vida. Con hielo, lima y una pizca de canela.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_local">Local</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 4h10v6a5 5 0 0 1-10 0V4Z"/></svg><span data-i18n="ph_dish">Foto</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_tinto">Tinto Listán</h4><span class="price">3,50 / 16 €</span></div>
+            <p data-i18n="d_tinto_d">Listán negro de la isla, tinto joven con cuerpo. Copa o botella.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_local">Local</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M9 9c1.5-2 4.5-2 6 0"/></svg><span data-i18n="ph_dish">Foto</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_sangria">Sangría de la casa</h4><span class="price">12 € jarra</span></div>
+            <p data-i18n="d_sangria_d">Tinto local, fruta de temporada y un toque de ron miel. Jarra para compartir.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_share">Para compartir</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CAFÉS Y SOBREMESA -->
+    <section class="cat-section" id="cafes">
+      <div class="cat-head">
+        <div>
+          <span class="eyebrow"><span data-i18n="cat_n_07">07</span> · <span data-i18n="cat_cafes">Cafés & sobremesa</span></span>
+          <h2><span data-i18n="ch_cafes_a">La excusa para</span> <em data-i18n="ch_cafes_b">quedarse</em><span data-i18n="ch_cafes_c"> un rato más.</span></h2>
+        </div>
+        <p class="desc" data-i18n="ch_cafes_d">Cafés canarios, infusiones de la huerta y digestivos isleños. La sobremesa es sagrada — tómate tu tiempo.</p>
+      </div>
+      <div class="dish-grid">
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="9" width="10" height="8" rx="1"/><path d="M16 11h2a2 2 0 0 1 0 4h-2"/><path d="M9 5v3M11 4v4M13 5v3"/></svg><span data-i18n="ph_dish">Foto</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_barraquito">Barraquito</h4><span class="price">3,50 €</span></div>
+            <p data-i18n="d_barraquito_d">El café canario por excelencia: leche condensada, Licor 43, espresso, lima y canela.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_signature">Estrella</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="13" r="5"/><path d="M7 13a5 5 0 0 1 10 0M12 8V5"/></svg><span data-i18n="ph_dish">Foto</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_cortado">Cortado leche y leche</h4><span class="price">1,80 €</span></div>
+            <p data-i18n="d_cortado_d">Espresso, leche condensada abajo, leche caliente arriba. Clásico de barra.</p>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3h8v5a4 4 0 0 1-8 0V3Z"/><path d="M12 12v8"/></svg><span data-i18n="ph_dish">Foto</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_chupito">Chupito de mojo dulce</h4><span class="price">3,00 €</span></div>
+            <p data-i18n="d_chupito_d">Receta de la casa con miel de palma, ron y limón.</p>
+            <div class="dish-tags"><span class="dish-tag" data-i18n="t_house">Receta de la casa</span></div>
+          </div>
+        </article>
+        <article class="dish">
+          <div class="dish-img"><div class="placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 4h12l-2 10a4 4 0 0 1-4 4 4 4 0 0 1-4-4L6 4Z"/></svg><span data-i18n="ph_dish">Foto</span></div></div>
+          <div class="dish-body">
+            <div class="dish-top"><h4 data-i18n="d_tisana">Tisana del huerto</h4><span class="price">2,80 €</span></div>
+            <p data-i18n="d_tisana_d">Hierbabuena, manzanilla y tomillo recién cortado de detrás de la cocina.</p>
+            <div class="dish-tags"><span class="dish-tag veg" data-i18n="t_veg">Vegetariano</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- legend / allergens -->
+    <div class="legend">
+      <div class="items">
+        <span class="veg" data-i18n="lg_veg">Vegetariano</span>
+        <span class="gf" data-i18n="lg_gf">Sin gluten</span>
+        <span class="spicy" data-i18n="lg_spicy">Picante</span>
+        <span data-i18n="lg_local">Producto local</span>
+      </div>
+      <p style="margin:0;font-size:12px;color:var(--ink-soft);max-width:46ch" data-i18n="lg_note">Avísanos siempre de alergias e intolerancias — adaptamos lo que podemos. IVA incluido. Carta orientativa, los platos pueden variar según temporada.</p>
+    </div>
+  </div>
+</main>
+
+<!-- CTA strip -->
+<section class="cta-strip">
+  <div class="wrap cta-grid">
+    <div>
+      <h2><span data-i18n="cta_h_a">¿Te lo imaginas en</span> <em data-i18n="cta_h_b">tu mesa</em><span data-i18n="cta_h_c">?</span></h2>
+      <p data-i18n="cta_p">Reserva online en treinta segundos. Si vienes con grupo grande (+6), mejor llámanos al +34 628 33 26 08.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn btn-primary" href="Teleclub Tahiche.html#hero">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <span data-i18n="cta_book">Reservar mesa</span>
+      </a>
+      <a class="btn btn-ghost" href="Teleclub Tahiche.html#find">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s7-7.5 7-13a7 7 0 0 0-14 0c0 5.5 7 13 7 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <span data-i18n="cta_route">Cómo llegar</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">Teleclub Tahiche <span class="sub">Bar · Cocina · Encuentro · Lanzarote</span></div>
+    <div class="foot-links">
+      <a href="Teleclub Tahiche.html" data-i18n="nav_home">Inicio</a>
+      <a href="Teleclub Tahiche.html#about" data-i18n="nav_about">Sobre nosotros</a>
+      <a href="Carta.html" data-i18n="nav_menu">Carta</a>
+    </div>
+    <div class="foot-meta">© 2026 Asoc. Sociocultural El Mayor · Tahiche</div>
+  </div>
+</footer>
+
+<script>
+const I18N = {
+  es: {
+    brand_sub:"Bar · Cocina · Encuentro",
+    nav_home:"Inicio", nav_about:"Sobre nosotros", nav_menu:"Carta",
+    cta_book:"Reservar mesa", cta_route:"Cómo llegar",
+    crumb_home:"Inicio",
+    ph_eyebrow:"Nuestra carta", ph_h1_a:"Lo de hoy,", ph_h1_b:"como en casa",
+    ph_lede:"Producto local, recetas honestas. La carta cambia con lo que llega de la lonja y la huerta. Pregunta al camarero por la pizarra del día — ahí están las sorpresas.",
+    m_local:"Producto canario", m_change:"Carta de temporada", m_update:"Actualizada hoy",
+    cat_picar:"Para picar", cat_mar:"Del mar", cat_tierra:"De la tierra", cat_veg:"De la huerta",
+    cat_postres:"Postres", cat_vinos:"Vinos & cócteles", cat_cafes:"Cafés & sobremesa",
+    cat_n_01:"01", cat_n_02:"02", cat_n_03:"03", cat_n_04:"04", cat_n_05:"05", cat_n_06:"06", cat_n_07:"07",
+    ch_picar_a:"Lo primero que llega a", ch_picar_b:"la mesa", ch_picar_c:".",
+    ch_picar_d:"Tapas honestas, para compartir y abrir boca. La mayoría salen calientes de la cocina; algunas frías de la nevera. Pídete varias y reparte.",
+    ch_mar_a:"Lo que pesca", ch_mar_b:"la cofradía", ch_mar_c:".",
+    ch_mar_d:"Pescado fresco del día, llegado por la mañana de la lonja de Arrecife. Si te apetece algo en concreto, pregunta — la pizarra cambia con la marea.",
+    ch_tierra_a:"Carnes,", ch_tierra_b:"guisos", ch_tierra_c:" y tradición.",
+    ch_tierra_d:"Cocina canaria de cuchara, a fuego lento. Carnes de productores de la isla, ninguna prisa.",
+    ch_veg_a:"Verde,", ch_veg_b:"fresco", ch_veg_c:", de aquí al lado.",
+    ch_veg_d:"Verduras de productores ecológicos de Tahiche, Tao y Mozaga. Cosecha de la semana — preguntar al camarero.",
+    ch_postres_a:"Para", ch_postres_b:"cerrar", ch_postres_c:" bien la sobremesa.",
+    ch_postres_d:"Postres tradicionales hechos en casa cada mañana. Pequeños — para dejar sitio al café.",
+    ch_vinos_a:"De la", ch_vinos_b:"Geria", ch_vinos_c:", con cariño.",
+    ch_vinos_d:"Vinos volcánicos de la isla, cervezas tiradas con cariño y cócteles honestos. Pregunta al camarero por la copa del día.",
+    ch_cafes_a:"La excusa para", ch_cafes_b:"quedarse", ch_cafes_c:" un rato más.",
+    ch_cafes_d:"Cafés canarios, infusiones de la huerta y digestivos isleños. La sobremesa es sagrada — tómate tu tiempo.",
+    ph_dish:"Foto del plato",
+    b_signature:"Plato estrella", b_today:"Hoy",
+    t_local:"Local", t_spicy:"Picantito", t_veg:"Vegetariano", t_gf:"Sin gluten",
+    t_house:"Receta de la casa", t_share:"Para compartir", t_signature:"Estrella",
+    t_traditional:"Tradicional", t_seasonal:"De temporada", t_vegan:"Vegano",
+    d_gambas:"Gambas al ajillo", d_gambas_d:"De la lonja de Arrecife. Aceite, ajo crujiente, guindilla y pan tostado para mojar.",
+    d_papas:"Papas arrugadas con mojos", d_papas_d:"Las de toda la vida. Mojo rojo y verde de la casa, con comino y cilantro.",
+    d_queso:"Queso asado de Uga", d_queso_d:"De cabra, a la plancha, con mojo de palmera y tostas de pan negro.",
+    d_croquetas:"Croquetas de cherne", d_croquetas_d:"Cremosas por dentro, doradas por fuera. Rebozadas a mano, 6 unidades.",
+    d_aceitunas:"Aceitunas de la casa", d_aceitunas_d:"Aliñadas con comino, ajo, hierbas y aceite local de oliva.",
+    d_tabla:"Tabla de quesos canarios", d_tabla_d:"Tres quesos de la isla, mermelada de higo, pan de la abuela y nueces.",
+    d_vieja:"Vieja sancochada", d_vieja_d:"Pescado del día con papas arrugadas y mojo verde. Como manda la tradición.",
+    d_chipi:"Chipirones a la plancha", d_chipi_d:"Con cebolla pochada, perejil y lima de la huerta del vecino.",
+    d_atun:"Atún encebollado", d_atun_d:"Receta de la abuela María. Jugoso por dentro, cebolla muy lenta.",
+    d_lapas:"Lapas a la plancha", d_lapas_d:"Con mojo verde y ajo tostado. Algo muy isleño, para los valientes.",
+    d_pulpo:"Pulpo a la brasa", d_pulpo_d:"Sobre puré de batata y aceite de pimentón ahumado de La Vera.",
+    d_caldereta:"Caldereta de pescado", d_caldereta_d:"Guiso marinero con cebolla, pimiento, vino blanco y azafrán de Mancha.",
+    d_conejo:"Conejo en salmorejo", d_conejo_d:"Marinado 24 horas en vino, pimentón y ajo. Guisado muy lento.",
+    d_cochino:"Cochino negro a baja temp.", d_cochino_d:"12 horas a fuego bajo, con miel de palma y batata asada al horno.",
+    d_garbanzas:"Garbanzas compuestas", d_garbanzas_d:"Con costilla de cerdo, chorizo y verduras de la huerta.",
+    d_ropa:"Ropa vieja canaria", d_ropa_d:"Garbanzos, carne deshilachada y patatas. Como Dios manda.",
+    d_solomillo:"Solomillo a la pimienta", d_solomillo_d:"De ternera local, salsa de pimienta verde y papas paja.",
+    d_cabrito:"Cabrito al horno", d_cabrito_d:"Asado entero con mojo palmero, romero y vino malvasía.",
+    d_ensalada:"Ensalada del huerto", d_ensalada_d:"Tomate, lechuga, aguacate, queso fresco y vinagreta de miel de palma.",
+    d_revuelto:"Revuelto de gofio", d_revuelto_d:"Con setas, espárragos verdes y queso de cabra fundido.",
+    d_calabaza:"Calabaza asada", d_calabaza_d:"Con tahini de la casa, semillas tostadas y hojas de la huerta.",
+    d_potaje:"Potaje de berros", d_potaje_d:"Caldo verde con piña, judías, calabaza y pella de gofio.",
+    d_bienmesabe:"Tarta de queso ahumado", d_bienmesabe_d:"Cremosa, ligeramente ahumada con queso de Uga, coulis de frutos rojos y gofio espolvoreado.",
+    d_quesillo:"Tarta de pistacho", d_quesillo_d:"Cremosa de pistacho sobre base de brownie, con sirope de chocolate. Piñón verde por encima.",
+    d_helado:"Brownie", d_helado_d:"Brownie de chocolate negro húmeco por dentro, con helado de vainilla y nueces caramelizadas.",
+    d_higos:"Bienmesabe", d_higos_d:"Receta tradicional canaria de almendra, miel y limón. Servido en copa con helado y barquillos.",
+    d_malvasia:"Malvasía volcánica", d_malvasia_d:"Blanco seco de La Geria. Copa o botella. Mineral, fresco.",
+    d_cana:"Caña Dorada / Tropical", d_cana_d:"Tirada con cariño, muy fría. La de toda la vida.",
+    d_mojito:"Mojito de la casa", d_mojito_d:"Hierbabuena fresca del huerto, ron blanco, lima y azúcar moreno.",
+    d_ron:"Ron miel Arehucas", d_ron_d:"Canario de toda la vida. Con hielo, lima y una pizca de canela.",
+    d_tinto:"Tinto Listán", d_tinto_d:"Listán negro de la isla, tinto joven con cuerpo. Copa o botella.",
+    d_sangria:"Sangría de la casa", d_sangria_d:"Tinto local, fruta de temporada y un toque de ron miel. Jarra para compartir.",
+    d_barraquito:"Barraquito", d_barraquito_d:"El café canario por excelencia: leche condensada, Licor 43, espresso, lima y canela.",
+    d_cortado:"Cortado leche y leche", d_cortado_d:"Espresso, leche condensada abajo, leche caliente arriba. Clásico de barra.",
+    d_chupito:"Chupito de mojo dulce", d_chupito_d:"Receta de la casa con miel de palma, ron y limón.",
+    d_tisana:"Tisana del huerto", d_tisana_d:"Hierbabuena, manzanilla y tomillo recién cortado de detrás de la cocina.",
+    chef_q:"\u201CLa cocina no se inventa: se cuida. Lo que servimos es lo que comemos nosotros — y lo que comían nuestras abuelas.\u201D",
+    chef_name:"Pepe Hernández", chef_role:"Cocinero & vecino, desde 1978",
+    cs_dishes:"Platos en carta", cs_local:"Pescado canario", cs_proveedores:"Productores locales", cs_gen:"Generaciones",
+    lg_veg:"Vegetariano", lg_gf:"Sin gluten", lg_spicy:"Picante", lg_local:"Producto local",
+    lg_note:"Avísanos siempre de alergias e intolerancias — adaptamos lo que podemos. IVA incluido. Carta orientativa, los platos pueden variar según temporada.",
+    cta_h_a:"¿Te lo imaginas en", cta_h_b:"tu mesa", cta_h_c:"?",
+    cta_p:"Reserva online en treinta segundos. Si vienes con grupo grande (+6), mejor llámanos al +34 628 33 26 08."
+  },
+  en: {
+    brand_sub:"Bar · Kitchen · Meeting place",
+    nav_home:"Home", nav_about:"About us", nav_menu:"Menu",
+    cta_book:"Book a table", cta_route:"Get directions",
+    crumb_home:"Home",
+    ph_eyebrow:"Our menu", ph_h1_a:"Today's plates,", ph_h1_b:"like at home",
+    ph_lede:"Local produce, honest recipes. The menu shifts with what comes off the boat and out of the garden. Ask your waiter about today's chalkboard — that's where the surprises live.",
+    m_local:"Canarian produce", m_change:"Seasonal menu", m_update:"Updated today",
+    cat_picar:"Small plates", cat_mar:"From the sea", cat_tierra:"From the land", cat_veg:"From the garden",
+    cat_postres:"Desserts", cat_vinos:"Wine & cocktails", cat_cafes:"Coffee & after",
+    cat_n_01:"01", cat_n_02:"02", cat_n_03:"03", cat_n_04:"04", cat_n_05:"05", cat_n_06:"06", cat_n_07:"07",
+    ch_picar_a:"The first thing on", ch_picar_b:"the table", ch_picar_c:".",
+    ch_picar_d:"Honest tapas, made for sharing. Most leave the kitchen warm; some come cold from the fridge. Order a few, pass them around.",
+    ch_mar_a:"Whatever the", ch_mar_b:"cofradía", ch_mar_c:" caught.",
+    ch_mar_d:"Daily fresh fish, in this morning from the Arrecife docks. Ask if you fancy something specific — the chalkboard moves with the tide.",
+    ch_tierra_a:"Meats,", ch_tierra_b:"stews", ch_tierra_c:" and tradition.",
+    ch_tierra_d:"Slow, honest Canarian cooking. Meat from island producers, no hurry whatsoever.",
+    ch_veg_a:"Green,", ch_veg_b:"fresh", ch_veg_c:", from right next door.",
+    ch_veg_d:"Vegetables from organic growers in Tahiche, Tao and Mozaga. This week's harvest — ask the waiter.",
+    ch_postres_a:"To", ch_postres_b:"close", ch_postres_c:" the sobremesa properly.",
+    ch_postres_d:"Traditional desserts made fresh each morning. Small ones — to leave room for coffee.",
+    ch_vinos_a:"From", ch_vinos_b:"La Geria", ch_vinos_c:", with love.",
+    ch_vinos_d:"Volcanic island wines, cold draft beer poured with love, and honest cocktails. Ask the bar about today's pour.",
+    ch_cafes_a:"An excuse to", ch_cafes_b:"stay", ch_cafes_c:" a little longer.",
+    ch_cafes_d:"Canarian coffees, garden infusions and island digestifs. The sobremesa is sacred — take your time.",
+    ph_dish:"Dish photo",
+    b_signature:"Star dish", b_today:"Today",
+    t_local:"Local", t_spicy:"Spicy", t_veg:"Vegetarian", t_gf:"Gluten-free",
+    t_house:"House recipe", t_share:"For sharing", t_signature:"Star",
+    t_traditional:"Traditional", t_seasonal:"Seasonal", t_vegan:"Vegan",
+    d_gambas:"Garlic prawns", d_gambas_d:"From the Arrecife docks. Olive oil, crispy garlic, chilli and toasted bread to dip.",
+    d_papas:"Wrinkled potatoes with mojos", d_papas_d:"The Canarian classic. House red & green mojo, cumin and cilantro.",
+    d_queso:"Grilled Uga goat cheese", d_queso_d:"From Uga, plancha-grilled, with palm mojo and black-bread toasts.",
+    d_croquetas:"Cherne fish croquettes", d_croquetas_d:"Creamy inside, golden outside. Hand-rolled, 6 pieces.",
+    d_aceitunas:"House olives", d_aceitunas_d:"Dressed with cumin, garlic, herbs and local olive oil.",
+    d_tabla:"Canarian cheese board", d_tabla_d:"Three island cheeses, fig jam, grandma's bread, and walnuts.",
+    d_vieja:"Boiled parrotfish", d_vieja_d:"Daily fish with wrinkled potatoes and green mojo. Pure tradition.",
+    d_chipi:"Grilled baby squid", d_chipi_d:"With slow-cooked onion, parsley and lime from the neighbour's garden.",
+    d_atun:"Tuna with onion", d_atun_d:"Grandma María's recipe. Juicy inside, very slow onion.",
+    d_lapas:"Grilled limpets", d_lapas_d:"With green mojo and toasted garlic. Very island, very brave.",
+    d_pulpo:"Charred octopus", d_pulpo_d:"On sweet-potato purée with smoked Vera paprika oil.",
+    d_caldereta:"Fisherman's stew", d_caldereta_d:"Mariner stew with onion, pepper, white wine and Mancha saffron.",
+    d_conejo:"Rabbit salmorejo", d_conejo_d:"24h marinade in wine, paprika and garlic. Slow-stewed.",
+    d_cochino:"Slow-cooked black pork", d_cochino_d:"12 hours low and slow, with palm honey and oven-roasted sweet potato.",
+    d_garbanzas:"Chickpea stew", d_garbanzas_d:"With pork ribs, chorizo and garden vegetables.",
+    d_ropa:"Ropa vieja canaria", d_ropa_d:"Chickpeas, pulled meat, potatoes. The way it should be.",
+    d_solomillo:"Pepper sirloin", d_solomillo_d:"Local beef, green peppercorn sauce and shoestring fries.",
+    d_cabrito:"Roast kid goat", d_cabrito_d:"Whole-roasted with palmero mojo, rosemary and Malvasía wine.",
+    d_ensalada:"Garden salad", d_ensalada_d:"Tomato, lettuce, avocado, fresh cheese, palm-honey vinaigrette.",
+    d_revuelto:"Gofio scramble", d_revuelto_d:"With wild mushrooms, green asparagus and melted goat cheese.",
+    d_calabaza:"Roasted pumpkin", d_calabaza_d:"With house tahini, toasted seeds and garden leaves.",
+    d_potaje:"Watercress stew", d_potaje_d:"Green broth with corn, beans, pumpkin and gofio pella.",
+    d_bienmesabe:"Smoked cheesecake", d_bienmesabe_d:"Creamy, gently smoked with Uga cheese, red-berry coulis and a dusting of gofio.",
+    d_quesillo:"Pistachio cake", d_quesillo_d:"Creamy pistachio on a brownie base, chocolate syrup and chopped green pistachio on top.",
+    d_helado:"Brownie", d_helado_d:"Dark-chocolate brownie, gooey inside, with vanilla ice cream and caramelised walnuts.",
+    d_higos:"Bienmesabe", d_higos_d:"Traditional Canarian almond, honey and lemon. Served in a glass with ice cream and wafers.",
+    d_malvasia:"Volcanic Malvasía", d_malvasia_d:"Dry white from La Geria. Glass or bottle. Mineral, fresh.",
+    d_cana:"Draft beer (Dorada/Tropical)", d_cana_d:"Poured with love, ice cold. The classic.",
+    d_mojito:"House mojito", d_mojito_d:"Fresh garden mint, white rum, lime and brown sugar.",
+    d_ron:"Arehucas honey rum", d_ron_d:"Classic Canarian. With ice, lime and a pinch of cinnamon.",
+    d_tinto:"Listán red wine", d_tinto_d:"Island Listán Negro, young red with body. Glass or bottle.",
+    d_sangria:"House sangría", d_sangria_d:"Local red, seasonal fruit and a splash of honey rum. Pitcher for sharing.",
+    d_barraquito:"Barraquito", d_barraquito_d:"The Canarian coffee classic: condensed milk, Licor 43, espresso, lime and cinnamon.",
+    d_cortado:"Cortado leche y leche", d_cortado_d:"Espresso, condensed milk at the bottom, hot milk on top. Bar classic.",
+    d_chupito:"Sweet mojo shot", d_chupito_d:"House recipe with palm honey, rum and lemon.",
+    d_tisana:"Garden infusion", d_tisana_d:"Mint, chamomile and fresh thyme, just cut from behind the kitchen.",
+    chef_q:"\u201CCooking isn't invented: it's looked after. What we serve is what we eat ourselves — and what our grandmothers ate.\u201D",
+    chef_name:"Pepe Hernández", chef_role:"Cook & neighbour, since 1978",
+    cs_dishes:"Dishes on the menu", cs_local:"Canarian fish", cs_proveedores:"Local producers", cs_gen:"Generations",
+    lg_veg:"Vegetarian", lg_gf:"Gluten-free", lg_spicy:"Spicy", lg_local:"Local produce",
+    lg_note:"Always tell us about allergies and intolerances — we adapt what we can. VAT included. Menu is indicative; dishes can vary with season.",
+    cta_h_a:"Picture it on", cta_h_b:"your table", cta_h_c:".",
+    cta_p:"Book online in thirty seconds. For larger groups (6+), please call us on +34 628 33 26 08."
+  }
+};
+
+function applyLang(lang){
+  document.documentElement.lang = lang;
+  const dict = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    if(dict[k]) el.textContent = dict[k];
+  });
+  document.querySelectorAll('#langToggle button').forEach(b=>b.classList.toggle('on', b.dataset.lang===lang));
+}
+document.getElementById('langToggle').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-lang]'); if(b) applyLang(b.dataset.lang);
+});
+
+// sticky category scrollspy
+const sections = [...document.querySelectorAll('.cat-section')];
+const buttons = [...document.querySelectorAll('#catTrack button')];
+document.getElementById('catTrack').addEventListener('click', e=>{
+  const b = e.target.closest('button[data-target]');
+  if(!b) return;
+  const id = b.dataset.target;
+  const t = document.getElementById(id);
+  if(t){
+    const y = t.getBoundingClientRect().top + window.scrollY - 160;
+    window.scrollTo({top:y, behavior:'smooth'});
+  }
+});
+function spy(){
+  const y = window.scrollY + 200;
+  let active = sections[0];
+  for(const s of sections){ if(s.offsetTop <= y) active = s; }
+  buttons.forEach(b=>b.classList.toggle('on', b.dataset.target === active.id));
+  // keep active button visible in the horizontal track
+  const activeBtn = buttons.find(b=>b.classList.contains('on'));
+  if(activeBtn){
+    const track = document.getElementById('catTrack');
+    const target = activeBtn.offsetLeft - 16;
+    track.scrollTo({left:target, behavior:'smooth'});
+  }
+}
+window.addEventListener('scroll', spy, {passive:true});
+
+applyLang('es');
+</script>
+
+</body>
+</html>

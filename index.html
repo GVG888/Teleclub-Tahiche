@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Teleclub Tahiche · Tahiche, Lanzarote</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<style>
+  :root{
+    --green-900:#0e3a26;
+    --green-800:#13502f;
+    --green-700:#1a6e3f;
+    --green-600:#1f8a4a;        /* signature emerald — matches chairs */
+    --green-500:#27a35a;
+    --green-300:#9fd7b3;
+    --green-100:#e6f3ea;
+    --green-50:#f1f8f3;
+    --cream:#f7f3ea;
+    --cream-warm:#efe7d4;
+    --terracotta:#c66a45;
+    --ink:#0c1d14;
+    --ink-soft:#33463a;
+    --line:rgba(14,58,38,.14);
+
+    --font-sans:'General Sans','Plus Jakarta Sans',system-ui,sans-serif;
+    --font-display:'General Sans','Plus Jakarta Sans',serif;
+    --font-script:'Caveat',cursive;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--cream);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;cursor:pointer}
+  h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em;margin:0}
+
+  /* ——— layout helpers ——— */
+  .wrap{max-width:1320px;margin:0 auto;padding:0 28px}
+  .stack-sm{display:flex;flex-direction:column;gap:8px}
+  .row{display:flex;align-items:center;gap:14px}
+
+  /* ——— header ——— */
+  header.site{
+    position:fixed;top:18px;left:50%;transform:translateX(-50%);
+    width:min(1360px,calc(100% - 32px));z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 14px 10px 22px;
+    background:rgba(247,243,234,.78);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.6);
+    border-radius:999px;
+    box-shadow:0 12px 40px -20px rgba(14,58,38,.35);
+  }
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand-mark{width:38px;height:38px;border-radius:10px;background:var(--ink);display:grid;place-items:center;color:#bff5d0}
+  .brand-mark svg{width:24px;height:24px}
+  .brand-name{font-family:var(--font-script);font-size:22px;color:var(--green-800);line-height:1;margin-top:2px}
+  .brand-sub{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+  nav.primary{display:flex;gap:6px}
+  nav.primary a{padding:9px 14px;font-size:14px;font-weight:500;color:var(--ink-soft);border-radius:999px;transition:.18s}
+  nav.primary a:hover{background:rgba(31,138,74,.1);color:var(--green-800)}
+  nav.primary a.is-active{background:var(--ink);color:#fff}
+  .header-cta{display:flex;align-items:center;gap:10px}
+  .lang-toggle{display:flex;background:rgba(14,29,20,.06);padding:4px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.04em}
+  .lang-toggle button{border:0;background:transparent;padding:5px 11px;border-radius:999px;color:var(--ink-soft);text-transform:uppercase}
+  .lang-toggle button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;font-weight:600;font-size:14px;border-radius:999px;border:0;transition:.2s;white-space:nowrap}
+  .btn-primary{background:var(--green-600);color:#fff;box-shadow:0 8px 22px -10px rgba(31,138,74,.7), inset 0 1px 0 rgba(255,255,255,.2)}
+  .btn-primary:hover{background:var(--green-700);transform:translateY(-1px);box-shadow:0 14px 28px -12px rgba(31,138,74,.7)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{background:rgba(255,255,255,.6)}
+
+  @media (max-width:880px){
+    nav.primary{display:none}
+    header.site{padding:8px 8px 8px 16px}
+  }
+
+  /* ——— hero ——— */
+  .hero{
+    position:relative;
+    min-height:100vh;padding:140px 0 60px;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    overflow:hidden;color:#fff;
+    background:#0c1d14;
+  }
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05)}
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(120% 80% at 20% 110%,rgba(14,58,38,.85) 0%,rgba(14,58,38,.35) 35%,transparent 70%),
+      linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.2) 55%,rgba(0,0,0,.55) 100%);
+  }
+  .hero-inner{position:relative;z-index:1;width:100%}
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    padding:7px 14px;background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25);border-radius:999px;
+    backdrop-filter:blur(8px);margin-bottom:22px;
+  }
+  .hero-eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#86efac;box-shadow:0 0 12px #86efac}
+  .hero h1{
+    font-size:clamp(56px, 9vw, 132px);
+    line-height:.92;letter-spacing:-.035em;font-weight:600;
+    margin:22px 0 18px;max-width:14ch;
+    text-wrap:balance;
+  }
+  .hero h1 .accent{font-family:var(--font-script);font-weight:500;color:#bff5d0;display:block;font-size:.6em;letter-spacing:0;margin-top:-.18em;transform:translateX(8px)}
+  .hero-lede{font-size:clamp(18px,1.6vw,22px);max-width:46ch;color:rgba(255,255,255,.92);font-weight:400;text-wrap:pretty;line-height:1.45}
+  .hero-bottom{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:end;
+    margin-top:48px;
+  }
+  .hero-meta{display:flex;flex-wrap:wrap;gap:28px;margin-top:24px;font-size:13px;color:rgba(255,255,255,.78)}
+  .hero-meta .stars{color:#fbbf24;letter-spacing:2px}
+  .hero-meta strong{color:#fff;font-weight:600}
+
+  /* reservation card */
+  .res-card{
+    background:rgba(255,255,255,.97);color:var(--ink);
+    border-radius:24px;padding:22px;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.6);
+    border:1px solid rgba(255,255,255,.7);
+  }
+  .res-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .res-head h3{font-size:18px;font-weight:600}
+  .res-head .live{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green-700);display:flex;align-items:center;gap:6px}
+  .res-head .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green-500);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+  .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .field{display:flex;flex-direction:column;gap:5px;padding:10px 12px;background:var(--cream);border-radius:14px;border:1px solid transparent;transition:.15s;position:relative}
+  .field:focus-within{border-color:var(--green-500);background:#fff;box-shadow:0 0 0 4px rgba(31,138,74,.1)}
+  .field label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+  .field .value{font-size:14px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:8px}
+  .field select, .field input{
+    border:0;background:transparent;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);
+    outline:0;appearance:none;-webkit-appearance:none;padding:0;width:100%;
+  }
+  .field .caret{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--ink-soft);pointer-events:none}
+
+  .time-slots{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .time-slots button{
+    border:1px solid var(--line);background:#fff;color:var(--ink);
+    padding:7px 12px;border-radius:999px;font-size:13px;font-weight:500;transition:.15s
+  }
+  .time-slots button:hover{border-color:var(--green-500)}
+  .time-slots button.on{background:var(--green-600);color:#fff;border-color:var(--green-600)}
+  .time-slots button.dim{color:#9ca3af;text-decoration:line-through;pointer-events:none}
+
+  .res-submit{width:100%;margin-top:14px;justify-content:center;padding:14px;font-size:15px}
+
+  /* confirmation overlay */
+  .confirm{
+    position:absolute;inset:0;background:rgba(255,255,255,.98);border-radius:24px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:28px;gap:14px;
+    animation:confirmIn .35s ease;
+  }
+  @keyframes confirmIn{from{opacity:0;transform:scale(.96)}}
+  .check{width:62px;height:62px;border-radius:50%;background:var(--green-600);display:grid;place-items:center;color:#fff;box-shadow:0 10px 26px -10px rgba(31,138,74,.6)}
+  .confirm h4{font-size:22px}
+  .confirm .ref{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+
+  @media (max-width:880px){
+    .hero-bottom{grid-template-columns:1fr;gap:28px}
+  }
+
+  /* hero social chips */
+  .hero-social{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .social-chip{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:9px 14px 9px 12px;border-radius:999px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.2);
+    color:#fff;font-size:13px;font-weight:500;letter-spacing:-.005em;
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    transition:.2s;
+  }
+  .social-chip svg{width:18px;height:18px;flex-shrink:0}
+  .social-chip:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.35);transform:translateY(-1px)}
+  .social-chip strong{color:#fff;font-weight:700}
+  .social-chip:nth-child(2) svg{color:#fbbf24}
+
+  /* ——— menu section ——— */
+  .menu{padding:90px 0 80px;background:linear-gradient(180deg, var(--cream) 0%, #f3ecda 100%);position:relative;overflow:hidden}
+  .menu::before{content:"";position:absolute;top:-180px;left:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(31,138,74,.12),transparent 70%);pointer-events:none}
+  .menu-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:42px;position:relative}
+  .menu-head h2{font-size:clamp(38px,4.6vw,64px);line-height:1.02;letter-spacing:-.03em;color:var(--green-900);max-width:14ch}
+  .menu-head h2 em{font-family:var(--font-script);font-style:normal;color:var(--green-600);font-weight:500}
+  .menu-head .note{max-width:34ch;color:var(--ink-soft);font-size:14.5px;line-height:1.6}
+  .menu-tabs{display:inline-flex;background:#fff;border-radius:999px;padding:5px;gap:2px;border:1px solid var(--line);box-shadow:0 8px 24px -16px rgba(14,58,38,.3);margin-bottom:32px;flex-wrap:wrap}
+  .menu-tabs button{border:0;background:transparent;padding:9px 18px;font-size:13px;font-weight:600;color:var(--ink-soft);border-radius:999px;transition:.2s;letter-spacing:.01em}
+  .menu-tabs button.on{background:var(--green-800);color:#fff;box-shadow:0 4px 12px -4px rgba(14,58,38,.35)}
+  .menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 60px;position:relative}
+  .menu-item{display:flex;align-items:baseline;gap:14px;padding:18px 0;border-bottom:1px dashed var(--line)}
+  .menu-item .body{flex:1;min-width:0}
+  .menu-item h4{font-size:17px;letter-spacing:-.01em;color:var(--green-900);font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:8px}
+  .menu-item h4 .tag{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--green-700);background:var(--green-50);padding:3px 7px;border-radius:6px;font-weight:700}
+  .menu-item p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+  .menu-item .dots{flex:1;border-bottom:1px dotted rgba(14,58,38,.2);margin:0 6px;transform:translateY(-4px);min-width:20px}
+  .menu-item .price{font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--green-700);white-space:nowrap;letter-spacing:-.01em}
+  .menu-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:36px;padding-top:24px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .menu-foot .small{font-size:12px;color:var(--ink-soft);max-width:48ch;line-height:1.55}
+  @media (max-width:780px){.menu-grid{grid-template-columns:1fr;gap:0}}
+
+  /* ——— ribbon strip ——— */
+  .ribbon{
+    background:var(--green-800);color:#bff5d0;
+    overflow:hidden;border-top:1px solid rgba(255,255,255,.08);
+  }
+  .ribbon-track{display:flex;gap:48px;padding:18px 0;animation:slide 38s linear infinite;white-space:nowrap}
+  .ribbon-track span{font-family:var(--font-script);font-size:28px;color:#fff;display:inline-flex;align-items:center;gap:24px}
+  .ribbon-track span::after{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#86efac;margin-left:24px}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* ——— amenities row ——— */
+  .amenities{padding:64px 0 24px}
+  .amenities-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+    background:#fff;border-radius:22px;padding:8px;
+    box-shadow:0 18px 42px -28px rgba(14,58,38,.25);border:1px solid var(--line);
+  }
+  .amenity{padding:22px 18px;text-align:left;border-right:1px dashed var(--line);display:flex;flex-direction:column;gap:6px}
+  .amenity:last-child{border-right:0}
+  .amenity .ic{width:36px;height:36px;border-radius:10px;background:var(--green-50);color:var(--green-700);display:grid;place-items:center;margin-bottom:8px}
+  .amenity .ic svg{width:20px;height:20px}
+  .amenity h4{font-size:14px;letter-spacing:-.005em;color:var(--ink)}
+  .amenity p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+  @media (max-width:1000px){.amenities-grid{grid-template-columns:repeat(2,1fr)} .amenity{border-right:0;border-bottom:1px dashed var(--line)} .amenity:nth-last-child(-n+2){border-bottom:0}}
+
+  /* ——— about section ——— */
+  .about{padding:80px 0 60px}
+  .section-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--green-700);font-weight:700;margin-bottom:14px}
+  .section-eyebrow::before{content:"";width:22px;height:1px;background:var(--green-500)}
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center}
+  .about h2{font-size:clamp(38px,4.5vw,64px);line-height:1.02;letter-spacing:-.03em;color:var(--green-900);max-width:14ch}
+  .about h2 em{font-family:var(--font-script);font-weight:500;font-style:normal;color:var(--green-600)}
+  .about p{font-size:16px;color:var(--ink-soft);max-width:42ch;margin:22px 0 0;line-height:1.65}
+  .about-stats{display:flex;gap:34px;margin-top:30px}
+  .stat .n{font-size:34px;font-family:var(--font-display);font-weight:600;color:var(--green-800);line-height:1}
+  .stat .l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+  .about-collage{position:relative;height:560px}
+  .about-collage .frame{position:absolute;border-radius:18px;overflow:hidden;box-shadow:0 22px 50px -28px rgba(14,58,38,.45)}
+  .about-collage .frame img{width:100%;height:100%;object-fit:cover}
+  .about-collage .a{top:0;left:0;width:54%;height:62%}
+  .about-collage .b{top:30%;right:0;width:46%;height:48%;transform:rotate(2deg)}
+  .about-collage .c{bottom:0;left:14%;width:48%;height:38%;transform:rotate(-1.5deg)}
+  .about-collage .tag{position:absolute;background:#fff;border:1px solid var(--line);padding:10px 14px;border-radius:14px;font-size:12px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:8px;box-shadow:0 10px 24px -14px rgba(0,0,0,.3)}
+  .about-collage .tag .pill{font-size:10px;background:var(--green-600);color:#fff;padding:3px 7px;border-radius:999px;letter-spacing:.1em;text-transform:uppercase}
+  .about-collage .tag.t1{top:8%;right:-4%;transform:rotate(3deg)}
+  .about-collage .tag.t2{bottom:6%;left:0%;transform:rotate(-3deg)}
+  @media (max-width:900px){.about-grid{grid-template-columns:1fr;gap:40px}.about-collage{height:420px}}
+
+  /* ——— gallery (Instagram-style) ——— */
+  .gallery{padding:80px 0;background:linear-gradient(180deg,var(--cream) 0%, #fbf7ec 100%)}
+  .gallery-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;gap:24px;flex-wrap:wrap}
+  .gallery-head h2{font-size:clamp(38px,4.5vw,60px);line-height:1.02;color:var(--green-900);max-width:18ch;letter-spacing:-.03em}
+  .gallery-head .handle{display:flex;align-items:center;gap:10px;color:var(--ink-soft);font-size:14px;font-weight:500}
+  .gallery-head .handle svg{color:var(--green-600)}
+  .ig-grid{
+    display:grid;grid-template-columns:repeat(8,1fr);
+    grid-auto-rows:120px;gap:10px;
+  }
+  .ig{position:relative;border-radius:12px;overflow:hidden;background:#0c1d14;cursor:pointer;transition:.3s}
+  .ig img{width:100%;height:100%;object-fit:cover;transition:.6s}
+  .ig:hover img{transform:scale(1.06)}
+  .ig::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(14,58,38,.7));opacity:0;transition:.25s}
+  .ig:hover::after{opacity:1}
+  .ig .meta{position:absolute;left:12px;bottom:12px;color:#fff;font-size:12px;font-weight:500;display:flex;gap:10px;align-items:center;opacity:0;transform:translateY(6px);transition:.25s;z-index:1}
+  .ig:hover .meta{opacity:1;transform:none}
+  .ig .meta svg{width:14px;height:14px}
+  .ig.a{grid-column:span 3;grid-row:span 3}
+  .ig.b{grid-column:span 2;grid-row:span 2}
+  .ig.c{grid-column:span 3;grid-row:span 2}
+  .ig.d{grid-column:span 2;grid-row:span 2}
+  .ig.e{grid-column:span 3;grid-row:span 2}
+  .ig.f{grid-column:span 2;grid-row:span 3}
+  .ig.g{grid-column:span 3;grid-row:span 2}
+  @media (max-width:900px){
+    .ig-grid{grid-template-columns:repeat(4,1fr);grid-auto-rows:100px}
+    .ig.a,.ig.f{grid-column:span 2;grid-row:span 2}
+    .ig.b,.ig.c,.ig.d,.ig.e,.ig.g{grid-column:span 2;grid-row:span 2}
+  }
+
+  /* ——— find us ——— */
+  .find{padding:90px 0;background:var(--green-900);color:#e7f3eb;position:relative;overflow:hidden}
+  .find::before{
+    content:"";position:absolute;top:-100px;right:-100px;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle,rgba(31,138,74,.35),transparent 70%);
+  }
+  .find-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:center;position:relative}
+  .find h2{font-size:clamp(40px,4.6vw,68px);line-height:1.02;letter-spacing:-.03em;color:#fff;max-width:12ch}
+  .find h2 em{font-family:var(--font-script);font-style:normal;color:#bff5d0;font-weight:500}
+  .find-blocks{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+  .find-block{padding:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px}
+  .find-block .lbl{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#86efac;margin-bottom:6px;font-weight:700}
+  .find-block .v{font-size:15px;color:#fff;font-weight:500;line-height:1.45}
+  .find-block .v small{display:block;font-size:13px;font-weight:400;color:rgba(255,255,255,.7);margin-top:3px}
+  .hours-list{display:flex;flex-direction:column;gap:5px;margin-top:24px}
+  .hours-row{display:flex;justify-content:space-between;font-size:14px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.12);gap:12px}
+  .hours-row .d{color:rgba(255,255,255,.7)}
+  .hours-row .t{color:#fff;font-weight:500;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+  .hours-row.now{background:linear-gradient(90deg,rgba(134,239,172,.12),transparent);padding:7px 10px;margin:0 -10px;border-radius:8px;border-bottom-color:transparent}
+  .hours-row.now .d::before{content:"●";color:#86efac;margin-right:8px;animation:pulse 2s infinite}
+  .find-cta{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+  .find-cta .btn-ghost{border-color:rgba(255,255,255,.2);color:#fff}
+  .find-cta .btn-ghost:hover{background:rgba(255,255,255,.08)}
+
+  /* map */
+  .map-card{
+    position:relative;border-radius:24px;overflow:hidden;
+    aspect-ratio:1.05/1;
+    background:#1a3a28;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.5);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .map-svg{width:100%;height:100%;display:block}
+  .map-pin{
+    position:absolute;left:50%;top:46%;transform:translate(-50%,-100%);
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+  }
+  .map-pin .label{
+    background:#fff;color:var(--ink);font-size:12px;font-weight:600;
+    padding:8px 12px;border-radius:10px;box-shadow:0 8px 20px -8px rgba(0,0,0,.4);
+    white-space:nowrap;display:flex;align-items:center;gap:6px;
+  }
+  .map-pin .label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green-600)}
+  .map-pin .dot{
+    width:18px;height:18px;border-radius:50%;background:var(--green-500);
+    box-shadow:0 0 0 8px rgba(31,138,74,.35),0 0 0 18px rgba(31,138,74,.18);
+    animation:pulse 2.4s infinite;
+  }
+  @media (max-width:900px){.find-grid{grid-template-columns:1fr;gap:40px}}
+
+  /* hours — grouped card layout */
+  .schedule{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sched-card{
+    position:relative;padding:18px 18px 16px;border-radius:16px;
+    background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);
+    display:flex;flex-direction:column;gap:10px;
+    transition:.2s;
+  }
+  .sched-card .ic{
+    width:34px;height:34px;border-radius:10px;
+    background:rgba(134,239,172,.12);color:#86efac;
+    display:grid;place-items:center;
+  }
+  .sched-card .ic svg{width:17px;height:17px}
+  .sched-card .day{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#86efac;font-weight:700}
+  .sched-card .time{font-family:var(--font-display);font-size:22px;font-weight:600;color:#fff;letter-spacing:-.01em;line-height:1;font-variant-numeric:tabular-nums}
+  .sched-card .time .dash{color:#86efac;margin:0 4px;font-weight:400}
+  .sched-card.is-closed{background:rgba(255,255,255,.02);border-style:dashed}
+  .sched-card.is-closed .ic{background:rgba(255,255,255,.06);color:rgba(255,255,255,.55)}
+  .sched-card.is-closed .day{color:rgba(255,255,255,.55)}
+  .sched-card.is-closed .time{color:rgba(255,255,255,.7);font-size:18px}
+  .sched-card.is-now{
+    background:linear-gradient(160deg,rgba(31,138,74,.35),rgba(31,138,74,.06));
+    border-color:rgba(134,239,172,.45);
+    box-shadow:0 18px 40px -22px rgba(134,239,172,.4),inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .sched-card .badge{
+    position:absolute;top:0;right:18px;transform:translateY(-50%);
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+    color:#0c1d14;background:#86efac;padding:4px 9px;border-radius:999px;
+    display:flex;align-items:center;gap:5px;
+    box-shadow:0 6px 18px -6px rgba(134,239,172,.55);
+    white-space:nowrap;
+  }
+  .sched-card .badge::before{content:"";width:5px;height:5px;border-radius:50%;background:#0c1d14;animation:pulse 2s infinite}
+  @media (max-width:560px){.schedule{grid-template-columns:1fr}}
+
+  /* ——— footer ——— */
+  footer.site{background:#0a1610;color:rgba(255,255,255,.7);padding:42px 0 30px;border-top:1px solid rgba(255,255,255,.05)}
+  .foot-grid{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  .foot-brand{font-family:var(--font-script);font-size:26px;color:#fff}
+  .foot-brand .sub{display:block;font-family:var(--font-sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#86efac;font-weight:600;margin-top:2px}
+  .foot-links{display:flex;gap:24px;font-size:13px}
+  .foot-links a:hover{color:#fff}
+  .foot-meta{font-size:12px;color:rgba(255,255,255,.4)}
+
+  /* ——— neon eye logo (used in brand + hero corner) ——— */
+  .neon-eye{
+    width:64px;height:36px;display:inline-block;
+  }
+
+  /* sticky reserve micro on scroll? skip for simplicity */
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="#">
+    <span class="brand-mark">
+      <svg viewBox="0 0 48 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 14 C 10 2, 38 2, 46 14 C 38 26, 10 26, 2 14 Z"/>
+        <circle cx="24" cy="14" r="4.2" fill="currentColor" stroke="none"/>
+      </svg>
+    </span>
+    <span class="stack-sm" style="gap:2px">
+      <span class="brand-name">Teleclub Tahiche</span>
+      <span class="brand-sub" data-i18n="brand_sub">Bar · Cocina · Encuentro</span>
+    </span>
+  </a>
+  <nav class="primary">
+    <a class="is-active" href="#hero" data-i18n="nav_home">Inicio</a>
+    <a href="#about" data-i18n="nav_about">Sobre nosotros</a>
+    <a href="Carta.html" data-i18n="nav_menu">Carta</a>
+  </nav>
+  <div class="header-cta">
+    <div class="lang-toggle" id="langToggle">
+      <button data-lang="es" class="on">ES</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <a class="btn btn-primary" href="#hero">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <span data-i18n="cta_book">Reservar mesa</span>
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="photos/dining-room.jpg" alt="Comedor del Teleclub Tahiche con mesas y sillas verdes" />
+  </div>
+  <div class="hero-inner wrap">
+    <span class="hero-eyebrow"><span class="dot"></span><span data-i18n="hero_eyebrow">Tahiche · Lanzarote · desde 1978</span></span>
+
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-lede" data-i18n="hero_lede">
+</p>
+        <div class="hero-social">
+          <a class="social-chip" href="https://www.instagram.com/teleclubtahiche/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            <span>@teleclubtahiche</span>
+          </a>
+          <a class="social-chip" href="https://www.google.com/maps/search/?api=1&query=Teleclub+Tahiche" target="_blank" rel="noopener" aria-label="Google Reviews">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6 6.1 20.7l1.2-6.6L2.5 9.5l6.6-.9L12 2.5z"/></svg>
+            <span><strong>4.8</strong> · <span data-i18n="reviews_label">reseñas Google</span></span>
+          </a>
+        </div>
+      </div>
+      <div id="reservation-root"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Scrolling green ribbon -->
+<div class="ribbon" aria-hidden="true">
+  <div class="ribbon-track">
+    <span>Tapas calientes</span><span>Cerveza muy fría</span><span>Mojo verde</span><span>Música los viernes</span><span>Para llevar también</span><span>Bienvenidos vecinos</span>
+    <span>Tapas calientes</span><span>Cerveza muy fría</span><span>Mojo verde</span><span>Música los viernes</span><span>Para llevar también</span><span>Bienvenidos vecinos</span>
+  </div>
+</div>
+
+<!-- amenities -->
+<section class="amenities">
+  <div class="wrap">
+    <div class="amenities-grid">
+      <div class="amenity">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12c0-4 3-7 7-7s7 3 7 7"/><path d="M3 13h18l-2 7H5l-2-7Z"/></svg></span>
+        <h4 data-i18n="am1_t">Cocina local</h4>
+        <p data-i18n="am1_d">Pescado de la lonja, papas con mojo, lo de aquí.</p>
+      </div>
+      <div class="amenity">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 4h8l-1 4h2l-2 6a4 4 0 0 1-4 3 4 4 0 0 1-4-3L5 8h2L8 4Z"/><path d="M9 17v3M15 17v3"/></svg></span>
+        <h4 data-i18n="am2_t">Barra & cócteles</h4>
+        <p data-i18n="am2_d">Cañas tiradas con cariño, ron honesto.</p>
+      </div>
+      <div class="amenity">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9Z"/><path d="M9 10c1.5-2 4.5-2 6 0M9 14c1.5 2 4.5 2 6 0"/></svg></span>
+        <h4 data-i18n="am3_t">Buen ambiente</h4>
+        <p data-i18n="am3_d">Vecinos, viajeros, abuelas y guiris.</p>
+      </div>
+      <div class="amenity">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c1-3 4-5 6-5s5 2 6 5"/><path d="M14 19c.8-2 2.4-3.3 4-3.3s2.4.7 3 2"/></svg></span>
+        <h4 data-i18n="am4_t">Para familias</h4>
+        <p data-i18n="am4_d">Mesas grandes, tronas, helado al final.</p>
+      </div>
+      <div class="amenity">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 10c4-4 12-4 16 0M7 13c2.5-2.5 7.5-2.5 10 0M10 16c1.2-1.2 2.8-1.2 4 0"/><circle cx="12" cy="19" r="1.2" fill="currentColor"/></svg></span>
+        <h4 data-i18n="am5_t">Terraza al aire</h4>
+        <p data-i18n="am5_d">Pérgola verde, palmeras, brisa atlántica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div>
+      <span class="section-eyebrow" data-i18n="about_eyebrow">El sitio</span>
+      <h2><span data-i18n="about_h_a">Más que un</span> <em data-i18n="about_h_b">restaurante</em><span data-i18n="about_h_c">, el patio del barrio.</span></h2>
+      <p data-i18n="about_p">Llevamos décadas siendo el punto de encuentro de Tahiche. Aquí no hay carta interminable ni manteles blancos: hay lo de hoy en la pizarra, sillas verdes, y vecinos que ya saben dónde se sientan. Trae a quien quieras — la mesa estira.</p>
+      <div class="about-stats">
+        <div class="stat"><div class="n">1978</div><div class="l" data-i18n="stat1">Año de apertura</div></div>
+        <div class="stat"><div class="n">12k+</div><div class="l" data-i18n="stat2">Comensales/mes</div></div>
+        <div class="stat"><div class="n">3</div><div class="l" data-i18n="stat3">Generaciones</div></div>
+      </div>
+    </div>
+    <div class="about-collage">
+      <div class="frame a"><img src="photos/bar-crowd.jpg" alt="La barra verde llena de gente" /></div>
+      <div class="frame b"><img src="photos/terrace-diners.jpg" alt="Sobremesa en la terraza" /></div>
+      <div class="frame c"><img src="photos/shrimp-neon.jpg" alt="Gambas al ajillo bajo el neón" /></div>
+      <div class="tag t1"><span class="pill" data-i18n="tag_today">Hoy</span><span data-i18n="tag_today_v">Gambas al ajillo · 12€</span></div>
+      <div class="tag t2"><span class="pill" data-i18n="tag_live">En vivo</span><span data-i18n="tag_live_v">Sábado · Trío canario, 21h</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="gallery-head">
+      <div>
+        <span class="section-eyebrow" data-i18n="gal_eyebrow">Vida en el patio</span>
+        <h2 data-i18n="gal_h">Lo que pasa cuando suena la barra.</h2>
+      </div>
+      <a class="handle" href="#" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        @teleclubtahiche
+      </a>
+    </div>
+    <div class="ig-grid">
+      <div class="ig a"><img src="photos/bar-crowd.jpg" alt=""/><div class="meta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 21 11c0 5.5-9 10-9 10z"/></svg>1.2k</div></div>
+      <div class="ig b"><img src="photos/terrace-diners.jpg" alt=""/><div class="meta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 21 11c0 5.5-9 10-9 10z"/></svg>842</div></div>
+      <div class="ig c"><img src="photos/alhambra-beer.png" alt=""/><div class="meta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 21 11c0 5.5-9 10-9 10z"/></svg>2.1k</div></div>
+      <div class="ig d"><img src="photos/shrimp-neon.jpg" alt=""/><div class="meta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 21 11c0 5.5-9 10-9 10z"/></svg>3.4k</div></div>
+      <div class="ig e"><img src="photos/entrance-crowd.jpg" alt=""/><div class="meta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 21 11c0 5.5-9 10-9 10z"/></svg>619</div></div>
+      <div class="ig f"><img src="photos/metal-art.png" alt=""/><div class="meta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 21 11c0 5.5-9 10-9 10z"/></svg>988</div></div>
+      <div class="ig g"><img src="photos/plaza-exterior.png" alt=""/><div class="meta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-7-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 21 11c0 5.5-9 10-9 10z"/></svg>1.5k</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FIND US -->
+<section class="find" id="find">
+  <div class="wrap find-grid">
+    <div>
+      <span class="section-eyebrow" style="color:#86efac" data-i18n="find_eyebrow">Visítanos</span>
+      <h2><span data-i18n="find_h_a">Estamos en la</span> <em data-i18n="find_h_b">plaza</em><span data-i18n="find_h_c">, justo enfrente.</span></h2>
+      <div class="find-blocks">
+        <div class="find-block">
+          <div class="lbl" data-i18n="fb_addr">Dirección</div>
+          <div class="v">Plaza de Tahiche, 4<small>35507 Tahiche, Lanzarote</small></div>
+        </div>
+        <div class="find-block">
+          <div class="lbl" data-i18n="fb_call">Llámanos</div>
+          <div class="v">Reservas al
++34 628 33 26 08</div>
+        </div>
+        <div class="find-block" style="grid-column:1/-1">
+          <div class="lbl" data-i18n="fb_hours">Horario</div>
+          <div class="schedule">
+            <div class="sched-card is-closed">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M7 7l10 10"/></svg></span>
+              <div class="day" data-i18n="sc_mon_tue">Lunes · Martes</div>
+              <div class="time" data-i18n="closed">Cerrado</div>
+            </div>
+            <div class="sched-card">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/><circle cx="12" cy="15" r="1.6" fill="currentColor" stroke="none"/></svg></span>
+              <div class="day" data-i18n="sc_wed_thu">Miércoles · Jueves</div>
+              <div class="time">13:00<span class="dash">—</span>22:30</div>
+            </div>
+            <div class="sched-card is-now">
+              <span class="badge" data-i18n="open_now">Abierto ahora</span>
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+              <div class="day" data-i18n="sc_fri_sat">Viernes · Sábado</div>
+              <div class="time">13:00<span class="dash">—</span>23:00</div>
+            </div>
+            <div class="sched-card">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6.3 6.3 4.9 4.9M19.1 19.1l-1.4-1.4M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg></span>
+              <div class="day" data-i18n="sc_sun">Domingo</div>
+              <div class="time">13:00<span class="dash">—</span>17:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="find-cta">
+        <a class="btn btn-primary" href="#hero"><span data-i18n="cta_book">Reservar mesa</span></a>
+        <a class="btn btn-ghost" href="https://maps.google.com" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s7-7.5 7-13a7 7 0 0 0-14 0c0 5.5 7 13 7 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <span data-i18n="cta_route">Cómo llegar</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="map-card">
+      <svg class="map-svg" viewBox="0 0 600 580" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M40 0H0V40" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+          </pattern>
+        </defs>
+
+        <!-- flat green base -->
+        <rect width="600" height="580" fill="#0e3a26"/>
+        <rect width="600" height="580" fill="url(#grid)"/>
+
+        <!-- LZ-1 / main road (to Arrecife, Costa Teguise) -->
+        <path d="M0 290 C 150 280, 280 320, 420 300 S 600 270, 600 270" stroke="rgba(247,243,234,.6)" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <!-- LZ-10 / north road -->
+        <path d="M150 0 C 170 120, 260 220, 280 320 S 320 520, 340 580" stroke="rgba(247,243,234,.45)" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <!-- secondary streets -->
+        <path d="M0 150 L 600 200" stroke="rgba(247,243,234,.22)" stroke-width="6" fill="none"/>
+        <path d="M450 0 L 380 580" stroke="rgba(247,243,234,.22)" stroke-width="6" fill="none"/>
+        <path d="M0 380 L 600 410" stroke="rgba(247,243,234,.22)" stroke-width="6" fill="none"/>
+        <path d="M0 480 L 600 510" stroke="rgba(247,243,234,.18)" stroke-width="5" fill="none"/>
+
+        <!-- blocks / houses -->
+        <g fill="rgba(247,243,234,.1)" stroke="rgba(247,243,234,.18)">
+          <rect x="60" y="200" width="80" height="50" rx="4"/>
+          <rect x="180" y="180" width="60" height="60" rx="4"/>
+          <rect x="380" y="200" width="100" height="50" rx="4"/>
+          <rect x="60" y="320" width="100" height="60" rx="4"/>
+          <rect x="430" y="320" width="120" height="50" rx="4"/>
+          <rect x="200" y="400" width="80" height="50" rx="4"/>
+          <rect x="400" y="400" width="60" height="50" rx="4"/>
+          <rect x="80" y="430" width="70" height="40" rx="4"/>
+          <rect x="500" y="440" width="60" height="40" rx="4"/>
+        </g>
+
+        <!-- road labels -->
+        <text x="30" y="282" fill="rgba(247,243,234,.5)" font-family="Plus Jakarta Sans" font-size="9.5" letter-spacing="1.5">LZ-1 → ARRECIFE</text>
+        <text x="345" y="100" fill="rgba(247,243,234,.45)" font-family="Plus Jakarta Sans" font-size="9.5" letter-spacing="1.5">LZ-10 → TEGUISE</text>
+
+        <!-- plaza (where Teleclub is) -->
+        <circle cx="300" cy="270" r="56" fill="rgba(134,239,172,.15)" stroke="rgba(134,239,172,.4)" stroke-dasharray="4 4"/>
+        <text x="300" y="346" fill="rgba(134,239,172,.7)" font-family="Plus Jakarta Sans" font-size="11" letter-spacing="2" text-anchor="middle">PLAZA DE TAHICHE</text>
+      </svg>
+      <div class="map-pin">
+        <div class="label">Teleclub Tahiche</div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">Teleclub Tahiche <span class="sub">Bar · Cocina · Encuentro · Lanzarote</span></div>
+    <div class="foot-links">
+      <a href="#hero" data-i18n="nav_home">Inicio</a>
+      <a href="#about" data-i18n="nav_about">Sobre nosotros</a>
+      <a href="Carta.html" data-i18n="nav_menu">Carta</a>
+    </div>
+    <div class="foot-meta">© 2026 Asoc. Sociocultural El Mayor · Tahiche</div>
+  </div>
+</footer>
+
+<!-- ============== i18n ============== -->
+<script>
+  const I18N = {
+    es: {
+      brand_sub:"Bar · Cocina · Encuentro",
+      nav_home:"Inicio", nav_about:"Sobre nosotros", nav_menu:"Carta",
+      reviews_label:"reseñas Google",
+      menu_eyebrow:"Nuestra carta",
+      menu_h_a:"Lo de hoy,", menu_h_b:"como en casa", menu_h_c:".",
+      menu_note:"Producto local, recetas honestas. La carta cambia con lo que llega de la lonja y la huerta. Pregunta al camarero por la pizarra del día.",
+      menu_t1:"Para picar", menu_t2:"Del mar", menu_t3:"De la tierra", menu_t4:"Postres", menu_t5:"Para beber",
+      menu_disclaimer:"Carta orientativa — algunos platos pueden variar según temporada y disponibilidad. Avísanos de alergias e intolerancias.",
+      menu_items:{
+        para_picar:[
+          {n:"Papas arrugadas con mojos",d:"Las de toda la vida, con mojo rojo y verde de la casa.",p:"7,50"},
+          {n:"Queso asado de cabra",d:"De Uga, a la plancha, con mojo de palmera.",p:"9,00",t:"Estrella"},
+          {n:"Croquetas de cherne",d:"Cremosas, rebozadas a mano. Seis unidades.",p:"8,50"},
+          {n:"Aceitunas de la casa",d:"Aliñadas con comino, ajo y aceite local.",p:"4,00"},
+          {n:"Tabla de quesos canarios",d:"Tres quesos, mermelada de higo, pan de la abuela.",p:"14,00"},
+          {n:"Pulpo a la brasa",d:"Sobre puré de batata y aceite de pimentón.",p:"16,50"}
+        ],
+        mar:[
+          {n:"Gambas al ajillo",d:"Del día, con guindilla y pan tostado.",p:"12,00",t:"Hoy"},
+          {n:"Vieja sancochada",d:"Pescado del día con papas y mojo verde.",p:"18,50"},
+          {n:"Chipirones a la plancha",d:"Con cebolla pochada y limón de la huerta.",p:"14,50"},
+          {n:"Atún encebollado",d:"Receta de la abuela María, jugoso por dentro.",p:"15,00"},
+          {n:"Lapas a la plancha",d:"Con mojo verde y ajo tostado.",p:"13,50"}
+        ],
+        tierra:[
+          {n:"Conejo en salmorejo",d:"Marinado 24h, guisado a fuego lento.",p:"16,00"},
+          {n:"Cochino negro a baja temp.",d:"Con miel de palma y batata asada.",p:"17,50",t:"Estrella"},
+          {n:"Garbanzas compuestas",d:"Con costilla, chorizo y verduras de huerta.",p:"11,00"},
+          {n:"Ropa vieja canaria",d:"Garbanzos, carne y patatas como Dios manda.",p:"12,50"},
+          {n:"Solomillo a la pimienta",d:"De ternera local, con papas paja.",p:"19,00"}
+        ],
+        postres:[
+          {n:"Bienmesabe",d:"Receta tradicional con almendra y limón.",p:"5,50"},
+          {n:"Quesillo de la casa",d:"Hecho cada mañana, con caramelo de ron.",p:"5,00"},
+          {n:"Helado de gofio",d:"Cremoso, con miel de palma por encima.",p:"5,50"},
+          {n:"Higos con queso fresco",d:"En temporada — pregúntanos.",p:"6,00"}
+        ],
+        beber:[
+          {n:"Caña Dorada / Tropical",d:"Tirada con cariño, muy fría.",p:"2,50"},
+          {n:"Vino Malvasía volcánica",d:"De La Geria, copa o botella.",p:"3,50 / 18",t:"Local"},
+          {n:"Ron miel canario",d:"De Arehucas, con hielo y limón.",p:"4,50"},
+          {n:"Mojito de la casa",d:"Con hierbabuena fresca del huerto.",p:"7,00"},
+          {n:"Barraquito",d:"El café canario por excelencia.",p:"3,50"}
+        ]
+      },
+      cta_book:"Reservar mesa", cta_route:"Cómo llegar",
+      hero_eyebrow:"Tahiche · Lanzarote · desde 1978",
+      hero_title_a:"La mesa verde",
+      hero_title_b:"donde se encuentra la isla",
+      hero_lede:"Cocina canaria sin postureo, copas que duran lo que la sobremesa y un patio donde nadie tiene prisa. Bienvenidos al teleclub de toda la vida — con la nevera siempre fría.",
+      hero_open:"Abierto hoy hasta las 23:30",
+      am1_t:"Cocina local", am1_d:"Pescado de la lonja, papas con mojo, lo de aquí.",
+      am2_t:"Barra & cócteles", am2_d:"Cañas tiradas con cariño, ron honesto.",
+      am3_t:"Buen ambiente", am3_d:"Vecinos, viajeros, abuelas y guiris.",
+      am4_t:"Para familias", am4_d:"Mesas grandes, tronas, helado al final.",
+      am5_t:"Terraza al aire", am5_d:"Pérgola verde, palmeras, brisa atlántica.",
+      about_eyebrow:"El sitio",
+      about_h_a:"Más que un", about_h_b:"restaurante", about_h_c:", el patio del barrio.",
+      about_p:"Llevamos décadas siendo el punto de encuentro de Tahiche. Aquí no hay carta interminable ni manteles blancos: hay lo de hoy en la pizarra, sillas verdes, y vecinos que ya saben dónde se sientan. Trae a quien quieras — la mesa estira.",
+      stat1:"Año de apertura", stat2:"Comensales/mes", stat3:"Generaciones",
+      tag_today:"Hoy", tag_today_v:"Gambas al ajillo · 12€",
+      tag_live:"En vivo", tag_live_v:"Sábado · Trío canario, 21h",
+      gal_eyebrow:"Vida en el patio",
+      gal_h:"Lo que pasa cuando suena la barra.",
+      find_eyebrow:"Visítanos",
+      find_h_a:"Estamos en la", find_h_b:"plaza", find_h_c:", justo enfrente.",
+      fb_addr:"Dirección", fb_call:"Llámanos", fb_call_s:"Reservas grupos +6", fb_hours:"Horario",
+      sc_mon_tue:"Lunes · Martes", sc_wed_thu:"Miércoles · Jueves", sc_fri_sat:"Viernes · Sábado", sc_sun:"Domingo",
+      open_now:"Abierto ahora",
+      d_mon:"Lunes",d_tue:"Martes",d_wed:"Miércoles",d_thu:"Jueves",d_fri:"Viernes",d_sat:"Sábado",d_sun:"Domingo",
+      closed:"Cerrado",
+      // reservation
+      r_title:"Reservar mesa",
+      r_live:"Disponible en vivo",
+      r_date:"Fecha", r_party:"Comensales", r_time:"Hora",
+      r_name:"Tu nombre", r_phone:"Teléfono",
+      r_confirm:"Confirmar reserva",
+      r_done_h:"¡Mesa reservada!", r_done_p:"Te hemos enviado un SMS de confirmación. Si llegas tarde, llámanos.",
+      r_ref:"Referencia",
+      r_again:"Hacer otra",
+      r_persons:n => n+" "+(n===1?"persona":"personas"),
+      r_no_slots:"Sin huecos a esta hora — prueba con otro día.",
+      months:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+    },
+    en: {
+      brand_sub:"Bar · Kitchen · Meeting place",
+      nav_home:"Home", nav_about:"About us", nav_menu:"Menu",
+      reviews_label:"Google reviews",
+      menu_eyebrow:"Our menu",
+      menu_h_a:"Today's plates,", menu_h_b:"like at home", menu_h_c:".",
+      menu_note:"Local produce, honest recipes. The menu shifts with what comes off the boat and out of the garden. Ask your waiter about today's chalkboard.",
+      menu_t1:"Small plates", menu_t2:"From the sea", menu_t3:"From the land", menu_t4:"Desserts", menu_t5:"To drink",
+      menu_disclaimer:"Menu is indicative — some dishes vary by season and availability. Please tell us about any allergies.",
+      menu_items:{
+        para_picar:[
+          {n:"Papas arrugadas with mojos",d:"The classic — wrinkled potatoes with red & green house mojo.",p:"7.50"},
+          {n:"Grilled Uga goat cheese",d:"From Uga, plancha-grilled, with palm-sap mojo.",p:"9.00",t:"Star"},
+          {n:"Cherne fish croquettes",d:"Hand-rolled, creamy, six pieces.",p:"8.50"},
+          {n:"House olives",d:"Dressed with cumin, garlic and local olive oil.",p:"4.00"},
+          {n:"Canarian cheese board",d:"Three cheeses, fig jam, grandma's bread.",p:"14.00"},
+          {n:"Charred octopus",d:"On sweet-potato purée with paprika oil.",p:"16.50"}
+        ],
+        mar:[
+          {n:"Garlic prawns",d:"Today's catch with chilli and toasted bread.",p:"12.00",t:"Today"},
+          {n:"Boiled parrotfish",d:"Daily fish with papas and green mojo.",p:"18.50"},
+          {n:"Grilled baby squid",d:"With slow-cooked onion and lemon.",p:"14.50"},
+          {n:"Tuna with onion",d:"Grandma María's recipe — juicy inside.",p:"15.00"},
+          {n:"Grilled limpets",d:"With green mojo and toasted garlic.",p:"13.50"}
+        ],
+        tierra:[
+          {n:"Rabbit in salmorejo",d:"24h marinade, slow-stewed.",p:"16.00"},
+          {n:"Slow-cooked black pork",d:"With palm honey and roasted sweet potato.",p:"17.50",t:"Star"},
+          {n:"Garbanzas compuestas",d:"With ribs, chorizo and garden vegetables.",p:"11.00"},
+          {n:"Ropa vieja canaria",d:"Chickpeas, meat and potatoes done right.",p:"12.50"},
+          {n:"Pepper-sauce sirloin",d:"Local beef with shoestring fries.",p:"19.00"}
+        ],
+        postres:[
+          {n:"Bienmesabe",d:"Traditional almond & lemon dessert.",p:"5.50"},
+          {n:"House flan",d:"Made fresh each morning, rum caramel.",p:"5.00"},
+          {n:"Gofio ice cream",d:"Creamy, drizzled with palm honey.",p:"5.50"},
+          {n:"Figs with fresh cheese",d:"In season — ask us.",p:"6.00"}
+        ],
+        beber:[
+          {n:"Draft beer (Dorada / Tropical)",d:"Poured with love. Ice cold.",p:"2.50"},
+          {n:"Volcanic Malvasía wine",d:"From La Geria — by glass or bottle.",p:"3.50 / 18",t:"Local"},
+          {n:"Canarian honey rum",d:"Arehucas, with ice and lemon.",p:"4.50"},
+          {n:"House mojito",d:"With mint from the garden.",p:"7.00"},
+          {n:"Barraquito",d:"The classic Canarian coffee.",p:"3.50"}
+        ]
+      },
+      cta_book:"Book a table", cta_route:"Get directions",
+      hero_eyebrow:"Tahiche · Lanzarote · since 1978",
+      hero_title_a:"The green table",
+      hero_title_b:"where the island meets",
+      hero_lede:"Honest Canarian cooking, drinks that last as long as the conversation, and a patio where nobody is in a rush. Welcome to the neighbourhood teleclub — fridge always cold.",
+      hero_open:"Open today until 23:30",
+      am1_t:"Local kitchen", am1_d:"Fish off the boat, papas con mojo, the real thing.",
+      am2_t:"Bar & cocktails", am2_d:"Cold cañas, honest rum, no fuss.",
+      am3_t:"Good company", am3_d:"Locals, travellers, grandmas, surfers.",
+      am4_t:"Family friendly", am4_d:"Big tables, high chairs, ice cream after.",
+      am5_t:"Open-air terrace", am5_d:"Green pergola, palm trees, Atlantic breeze.",
+      about_eyebrow:"The place",
+      about_h_a:"More than a", about_h_b:"restaurant", about_h_c:" — the neighbourhood patio.",
+      about_p:"For decades we've been Tahiche's meeting point. No long menu, no white tablecloths: just today's catch on the chalkboard, green chairs, and neighbours who already know which seat is theirs. Bring whoever — the table stretches.",
+      stat1:"Open since", stat2:"Guests / month", stat3:"Generations",
+      tag_today:"Today", tag_today_v:"Garlic prawns · €12",
+      tag_live:"Live", tag_live_v:"Saturday · Canarian trio, 9pm",
+      gal_eyebrow:"Patio life",
+      gal_h:"What happens when the bar gets loud.",
+      find_eyebrow:"Visit",
+      find_h_a:"We're on the", find_h_b:"plaza", find_h_c:", right across.",
+      fb_addr:"Address", fb_call:"Call us", fb_call_s:"Groups 6+ by phone", fb_hours:"Hours",
+      sc_mon_tue:"Mon · Tue", sc_wed_thu:"Wed · Thu", sc_fri_sat:"Fri · Sat", sc_sun:"Sunday",
+      open_now:"Open now",
+      d_mon:"Monday",d_tue:"Tuesday",d_wed:"Wednesday",d_thu:"Thursday",d_fri:"Friday",d_sat:"Saturday",d_sun:"Sunday",
+      closed:"Closed",
+      r_title:"Book a table",
+      r_live:"Live availability",
+      r_date:"Date", r_party:"Guests", r_time:"Time",
+      r_name:"Your name", r_phone:"Phone",
+      r_confirm:"Confirm booking",
+      r_done_h:"Table booked!", r_done_p:"We've sent you a confirmation SMS. If you're running late, just call.",
+      r_ref:"Reference",
+      r_again:"Book another",
+      r_persons:n => n+" "+(n===1?"guest":"guests"),
+      r_no_slots:"No slots at this time — try another day.",
+      months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+    }
+  };
+
+  let currentLang = 'es';
+  function applyLang(lang){
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    const dict = I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(dict[key]) el.textContent = dict[key];
+    });
+    document.querySelectorAll('#langToggle button').forEach(b=>{
+      b.classList.toggle('on', b.dataset.lang===lang);
+    });
+    window.dispatchEvent(new CustomEvent('langchange',{detail:{lang}}));
+  }
+  document.getElementById('langToggle').addEventListener('click',e=>{
+    const b=e.target.closest('button[data-lang]');
+    if(b) applyLang(b.dataset.lang);
+  });
+</script>
+
+<!-- ============== Reservation Widget ============== -->
+<script type="text/babel" data-presets="env,react">
+  const { useState, useMemo, useEffect } = React;
+
+  function dict(){ return I18N[document.documentElement.lang || 'es']; }
+
+  // generate next 14 days, skipping Mondays (closed)
+  function nextDays(){
+    const out=[];const today=new Date(); today.setHours(0,0,0,0);
+    for(let i=0;i<21 && out.length<14;i++){
+      const d=new Date(today); d.setDate(today.getDate()+i);
+      if(d.getDay()!==1) out.push(d); // 1 = Monday closed
+    }
+    return out;
+  }
+  const TIMES = ['12:30','13:00','13:30','14:00','14:30','19:30','20:00','20:30','21:00','21:30','22:00'];
+  // Pseudo-random "busy" slots per day
+  function busySet(date){
+    const k = date.getDate()+date.getMonth()*31;
+    return new Set(TIMES.filter((_,i)=>((k*7 + i*11)%9)<2));
+  }
+
+  function ReservationWidget(){
+    const [, force] = useState(0);
+    useEffect(()=>{
+      const f=()=>force(x=>x+1);
+      window.addEventListener('langchange',f);
+      return ()=>window.removeEventListener('langchange',f);
+    },[]);
+    const t = dict();
+    const days = useMemo(()=>nextDays(),[]);
+    const [dayIdx,setDayIdx]=useState(0);
+    const [party,setParty]=useState(2);
+    const [time,setTime]=useState('20:30');
+    const [name,setName]=useState('');
+    const [phone,setPhone]=useState('');
+    const [step,setStep]=useState('form'); // form | done
+    const [ref] = useState(()=>'TC-'+Math.floor(1000+Math.random()*9000));
+
+    const date = days[dayIdx];
+    const busy = useMemo(()=>busySet(date),[date]);
+    const dateLabel = date ? `${date.getDate()} ${t.months[date.getMonth()]} · ${['dom','lun','mar','mié','jue','vie','sáb'][date.getDay()]}` : '';
+
+    function submit(e){
+      e.preventDefault();
+      if(!name.trim()) return;
+      setStep('done');
+    }
+
+    return (
+      <div className="res-card" style={{position:'relative'}}>
+        <div className="res-head">
+          <h3>{t.r_title}</h3>
+          <span className="live">{t.r_live}</span>
+        </div>
+
+        <form onSubmit={submit}>
+          <div className="res-grid">
+            <label className="field" style={{gridColumn:'1 / -1'}}>
+              <span>{t.r_date}</span>
+              <div className="value">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                <select value={dayIdx} onChange={e=>setDayIdx(+e.target.value)}>
+                  {days.map((d,i)=>(
+                    <option key={i} value={i}>
+                      {`${d.getDate()} ${t.months[d.getMonth()]} · ${({es:['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat']}[currentLang])[d.getDay()]}`}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <span className="caret">▾</span>
+            </label>
+
+            <label className="field">
+              <span>{t.r_party}</span>
+              <div className="value">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c1-3 4-5 6-5s5 2 6 5"/></svg>
+                <select value={party} onChange={e=>setParty(+e.target.value)}>
+                  {[1,2,3,4,5,6,7,8].map(n=><option key={n} value={n}>{t.r_persons(n)}</option>)}
+                </select>
+              </div>
+              <span className="caret">▾</span>
+            </label>
+
+            <label className="field">
+              <span>{t.r_name}</span>
+              <div className="value">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+                <input value={name} onChange={e=>setName(e.target.value)} placeholder={currentLang==='es'?"María":"Maria"} required/>
+              </div>
+            </label>
+          </div>
+
+          <div style={{marginTop:14}}>
+            <div style={{fontSize:11,letterSpacing:'.14em',textTransform:'uppercase',color:'var(--ink-soft)',fontWeight:600,marginBottom:8}}>{t.r_time}</div>
+            <div className="time-slots">
+              {TIMES.map(tm=>(
+                <button type="button" key={tm}
+                  className={[busy.has(tm)?'dim':'', time===tm?'on':''].join(' ')}
+                  onClick={()=>!busy.has(tm)&&setTime(tm)}>{tm}</button>
+              ))}
+            </div>
+          </div>
+
+          <button type="submit" className="btn btn-primary res-submit">
+            {t.r_confirm}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+
+        {step==='done' && (
+          <div className="confirm">
+            <div className="check">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+            <h4>{t.r_done_h}</h4>
+            <div style={{fontSize:14,color:'var(--ink-soft)',maxWidth:'34ch'}}>{t.r_done_p}</div>
+            <div style={{
+              display:'flex',gap:10,padding:'12px 16px',background:'var(--green-50)',
+              border:'1px dashed var(--green-300)',borderRadius:12,fontSize:13,
+              alignItems:'center',marginTop:6
+            }}>
+              <span style={{color:'var(--ink-soft)',fontWeight:600}}>{name||'—'}</span>
+              <span style={{color:'var(--line)'}}>·</span>
+              <span style={{fontWeight:600}}>{dateLabel}</span>
+              <span style={{color:'var(--line)'}}>·</span>
+              <span style={{fontWeight:600}}>{time}</span>
+              <span style={{color:'var(--line)'}}>·</span>
+              <span style={{fontWeight:600}}>{t.r_persons(party)}</span>
+            </div>
+            <div className="ref">{t.r_ref}: <strong style={{color:'var(--green-700)'}}>{ref}</strong></div>
+            <button className="btn btn-ghost" onClick={()=>setStep('form')} style={{marginTop:6}}>{t.r_again}</button>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('reservation-root')).render(<ReservationWidget/>);
+</script>
+
+<script>applyLang('es');</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "teleclub-tahiche",
+  "version": "1.0.0",
+  "description": "Teleclub Tahiche - Restaurant website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Static site, no build needed'",
+    "start": "python -m http.server 3000"
+  },
+  "keywords": ["restaurant", "tahiche"],
+  "author": "",
+  "license": "ISC"
+}
